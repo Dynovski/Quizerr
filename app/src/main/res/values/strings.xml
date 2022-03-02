@@ -36,11 +36,9 @@
     <string name="label_home_panel_my_courses">My courses</string>
     <string name="label_home_panel_my_tests">My tests</string>
     <string name="label_home_panel_subscribed_courses">Subscribed courses</string>
+    <!-- Strings related to account details -->
+    <string name="prompt_account_name">Name</string>
 
-
-    <!--        <string name="account_name">Name</string>-->
-<!--        <string name="account_teacher">Teacher</string>-->
-<!--        <string name="account_student">Student</string>-->
 <!--        <string name="account_user_type">User type</string>-->
 <!--        <string name="subscribe">Subscribe</string>-->
 <!--        <string name="unsubscribe">Unsubscribe</string>-->

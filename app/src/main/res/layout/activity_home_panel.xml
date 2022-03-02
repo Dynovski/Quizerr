@@ -20,7 +20,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity=""
             android:orientation="vertical"
             android:weightSum="5">
 
@@ -256,6 +255,48 @@
                             android:fontFamily="@font/lato_bold"
                             android:gravity="center_horizontal"
                             android:text="@string/label_home_panel_create_test"
+                            android:textAlignment="center"
+                            android:textColor="@color/sandish"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/my_account_card_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="@color/green_dark"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="10dp"
+                    app:layout_columnWeight="1"
+                    app:layout_rowWeight="1">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_margin="16dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/ic_account_56"
+                            app:tint="@color/sandish" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato_bold"
+                            android:gravity="center_horizontal"
+                            android:text="@string/label_home_panel_my_account"
                             android:textAlignment="center"
                             android:textColor="@color/sandish"
                             android:textSize="16sp"

@@ -19,6 +19,7 @@ class HomePanelActivity: AppCompatActivity() {
     private lateinit var myCoursesCardView: CardView
     private lateinit var myTestsCardView: CardView
     private lateinit var createTestCardView: CardView
+    private lateinit var myAccountCardView: CardView
     private lateinit var activeTestsCardView: CardView
     private lateinit var resultsCardView: CardView
     private lateinit var signOutCardView: CardView
@@ -34,6 +35,7 @@ class HomePanelActivity: AppCompatActivity() {
         myCoursesCardView = homePanelBinding.myCoursesCardView
         myTestsCardView = homePanelBinding.myTestsCardView
         createTestCardView = homePanelBinding.createTestCardView
+        myAccountCardView = homePanelBinding.myAccountCardView
         activeTestsCardView = homePanelBinding.activeTestsCardView
         resultsCardView = homePanelBinding.resultsCardView
         signOutCardView = homePanelBinding.signOutCardView
@@ -61,6 +63,11 @@ class HomePanelActivity: AppCompatActivity() {
         createTestCardView.setOnClickListener {
             Log.d(LOG_TAG, "Selected 'Create test'")
             startActivity(Intent(this, SignInActivity::class.java))
+        }
+
+        myAccountCardView.setOnClickListener {
+            Log.d(LOG_TAG, "Selected 'My account'")
+            startActivity(Intent(this, AccountDetailsActivity::class.java))
         }
 
         activeTestsCardView.setOnClickListener {
