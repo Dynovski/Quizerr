@@ -57,7 +57,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/sign_out_card2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
@@ -99,7 +99,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/sign_out_card3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
@@ -141,7 +141,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/sign_out_card4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
@@ -184,7 +184,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/list_of_courses_card"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
                     android:layout_marginBottom="16dp"
@@ -225,7 +225,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/subscribed_courses_card"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
@@ -267,7 +267,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/tests_to_do_card"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
@@ -309,7 +309,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/results_card"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
@@ -351,7 +351,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/sign_out_card"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"

@@ -10,14 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Quizer">
         <activity
-            android:name=".activities.SignUpActivity"
+            android:name=".activities.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SignInActivity" />
+        <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.HomePanelActivity" />
         <activity android:name=".activities.ResetPasswordActivity" />
     </application>

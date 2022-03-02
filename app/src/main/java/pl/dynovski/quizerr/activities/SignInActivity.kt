@@ -1,6 +1,5 @@
 package pl.dynovski.quizerr.activities
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +7,6 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -147,5 +145,15 @@ class SignInActivity: SignActionActivity() {
                 }
                 hideProgressBar()
             }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // User still logged in
+        if (auth.currentUser != null) {
+            startActivity(Intent(this, HomePanelActivity::class.java))
+            finish()
+        }
     }
 }
