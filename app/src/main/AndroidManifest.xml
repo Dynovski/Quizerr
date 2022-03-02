@@ -10,11 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Quizer" >
         <activity
-            android:name=".activities.AccountDetailsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_account_details"
-            android:theme="@style/Quizer.NoActionBar" />
-        <activity
             android:name=".activities.SignInActivity"
             android:exported="true" >
             <intent-filter>
@@ -26,6 +21,7 @@
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.HomePanelActivity" />
         <activity android:name=".activities.ResetPasswordActivity" />
+        <activity android:name=".activities.AccountDetailsActivity" />
     </application>
 
 </manifest>
