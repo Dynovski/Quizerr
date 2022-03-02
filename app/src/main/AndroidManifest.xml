@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="pl.dynovski.quizerr">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/quizer_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/quizer_icon"
+        android:supportsRtl="true"
+        android:theme="@style/Quizer">
+        <activity
+            android:name=".activities.SignUpActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.SignInActivity" />
+        <activity android:name=".activities.HomePanelActivity" />
+        <activity android:name=".activities.ResetPasswordActivity" />
+    </application>
+
+</manifest>
