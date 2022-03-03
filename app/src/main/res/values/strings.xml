@@ -53,15 +53,18 @@
     <string name="error_new_course_no_description">Course must have a description</string>
     <string name="create_course_success">Successfully created new course</string>
     <string name="create_course_canceled">Create course cancelled</string>
-    <!--        <string name="account_user_type">User type</string>-->
+    <!-- Strings related to create test -->
+    <string name="action_create_test_cancel">Cancel</string>
+    <string name="action_create_test_next">Next</string>
+    <string name="prompt_create_test_name">Enter test name</string>
+    <string name="prompt_create_test_name_hint">Test name</string>
+    <string name="prompt_create_test_date">Enter deadline for this test</string>
+    <string name="prompt_create_test_date_hint">YYYY-MM-DD</string>
+    <string name="prompt_create_test_num_questions">Enter number of questions</string>
+    <string name="prompt_create_test_num_questions_hint">Enter number here</string>
+    <string name="action_create_test">Create</string>
     <!--        <string name="subscribe">Subscribe</string>-->
     <!--        <string name="unsubscribe">Unsubscribe</string>-->
-    <!--        <string name="add">Add</string>-->
-    <!--        <string name="cancel">Cancel</string>-->
-    <!--        <string name="create_test_name_prompt">Write name for the new test</string>-->
-    <!--        <string name="create_test_date_prompt">Write deadline for the new test</string>-->
-    <!--        <string name="create_test_name_hint">Test name</string>-->
-    <!--        <string name="create_name_date_hint">yyyy-MM-dd</string>-->
     <!--        <string name="create_test_question_hint">Question text</string>-->
     <!--        <string name="create_test_add_answers">Add answers</string>-->
     <!--        <string name="create_test_answer1">Answer 1</string>-->
@@ -72,7 +75,6 @@
     <!--        <string name="next">Next</string>-->
     <!--        <string name="edit">Edit</string>-->
     <!--        <string name="answer_hint">Write answer here</string>-->
-    <!--        <string name="create_test_num_of_questions">Write number of questions</string>-->
     <!--        <string name="course_name">Course name</string>-->
     <!--        <string name="teacher_name">Teacher name</string>-->
     <!--        <string name="description">Description</string>-->

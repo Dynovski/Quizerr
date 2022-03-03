@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Quizer">
         <activity
+            android:name=".activities.CreateTestActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.SignInActivity"
             android:exported="true">
             <intent-filter>
