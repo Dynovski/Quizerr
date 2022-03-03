@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="pl.dynovski.quizerr" >
+    package="pl.dynovski.quizerr">
 
     <application
         android:allowBackup="true"
@@ -8,10 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/quizer_icon"
         android:supportsRtl="true"
-        android:theme="@style/Quizer" >
+        android:theme="@style/Quizer">
         <activity
             android:name=".activities.SignInActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +22,7 @@
         <activity android:name=".activities.HomePanelActivity" />
         <activity android:name=".activities.ResetPasswordActivity" />
         <activity android:name=".activities.AccountDetailsActivity" />
+        <activity android:name=".activities.CreateCourseActivity" />
     </application>
 
 </manifest>

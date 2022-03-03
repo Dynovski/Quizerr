@@ -105,21 +105,23 @@ class SignInActivity: SignActionActivity() {
             }
         }
 
-        val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        val resetPasswordLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
             if (it.resultCode == RESULT_OK)
                 Toast.makeText(
-                    this, R.string.error_forgot_password_email_pending,
+                    this, R.string.reset_password_email_pending,
                     Toast.LENGTH_SHORT
                 ).show();
             else if (it.resultCode == RESULT_CANCELED)
                 Toast.makeText(
-                    this, R.string.error_forgot_password_cancelled,
+                    this, R.string.error_reset_password_cancelled,
                     Toast.LENGTH_SHORT
                 ).show();
         }
 
         signInBinding.forgotPasswordTextView.setOnClickListener {
-            resultLauncher.launch(Intent(this, ResetPasswordActivity::class.java))
+            resetPasswordLauncher.launch(Intent(this, ResetPasswordActivity::class.java))
         }
     }
 

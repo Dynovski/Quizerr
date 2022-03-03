@@ -3,11 +3,14 @@ package pl.dynovski.quizerr.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.databinding.ActivityHomePanelBinding
 
 class HomePanelActivity: AppCompatActivity() {
@@ -51,9 +54,24 @@ class HomePanelActivity: AppCompatActivity() {
             startActivity(Intent(this, SignInActivity::class.java))
         }
 
+        val createCourseLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            if (it.resultCode == RESULT_OK)
+                Toast.makeText(
+                    this, R.string.create_course_success,
+                    Toast.LENGTH_SHORT
+                ).show();
+            else if (it.resultCode == RESULT_CANCELED)
+                Toast.makeText(
+                    this, R.string.create_course_canceled,
+                    Toast.LENGTH_SHORT
+                ).show();
+        }
+
         createCourseCardView.setOnClickListener {
             Log.d(LOG_TAG, "Selected 'Create course'")
-            startActivity(Intent(this, SignInActivity::class.java))
+            createCourseLauncher.launch(Intent(this, CreateCourseActivity::class.java))
         }
 
         myCoursesCardView.setOnClickListener {
