@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.databinding.ActivityHomePanelBinding
 
 class HomePanelActivity: AppCompatActivity() {
@@ -24,11 +26,15 @@ class HomePanelActivity: AppCompatActivity() {
     private lateinit var resultsCardView: CardView
     private lateinit var signOutCardView: CardView
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         homePanelBinding = ActivityHomePanelBinding.inflate(layoutInflater)
         setContentView(homePanelBinding.root)
+
+        auth = Firebase.auth
 
         allCoursesCardView = homePanelBinding.allCoursesCardView
         createCourseCardView = homePanelBinding.createCourseCardView
@@ -82,7 +88,7 @@ class HomePanelActivity: AppCompatActivity() {
 
         signOutCardView.setOnClickListener {
             Log.d(LOG_TAG, "Selected 'Sign out'")
-            FirebaseAuth.getInstance().signOut()
+            auth.signOut()
             val intent = Intent(this, SignInActivity::class.java)
             intent.addFlags(
                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -91,5 +97,11 @@ class HomePanelActivity: AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(LOG_TAG, "Signed out on HomePanelActivity destroy")
+        auth.signOut()
     }
 }

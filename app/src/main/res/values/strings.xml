@@ -38,7 +38,10 @@
     <string name="label_home_panel_subscribed_courses">Subscribed courses</string>
     <!-- Strings related to account details -->
     <string name="prompt_account_name">Name</string>
-
+    <string name="prompt_account_created_tests">Tests created</string>
+    <string name="prompt_account_created_courses">Courses created</string>
+    <string name="prompt_account_delete">Delete account</string>
+    <string name="action_account_delete">Delete</string>
 <!--        <string name="account_user_type">User type</string>-->
 <!--        <string name="subscribe">Subscribe</string>-->
 <!--        <string name="unsubscribe">Unsubscribe</string>-->
