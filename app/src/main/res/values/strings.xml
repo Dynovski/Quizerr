@@ -63,6 +63,11 @@
     <string name="prompt_create_test_num_questions">Enter number of questions</string>
     <string name="prompt_create_test_num_questions_hint">Enter number here</string>
     <string name="action_create_test">Create</string>
+    <string name="prompt_answer_hint">Write answer here</string>
+    <string name="prompt_question_hint">Write question here</string>
+    <string name="prompt_correct">Correct</string>
+    <!-- Strings related to courses list -->
+    <string name="prompt_course_item_enrolled">Enrolled:</string>
     <!--        <string name="subscribe">Subscribe</string>-->
     <!--        <string name="unsubscribe">Unsubscribe</string>-->
     <!--        <string name="create_test_question_hint">Question text</string>-->

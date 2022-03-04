@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/home_panel_background"
+            android:gravity="center"
+            android:paddingTop="40dp"
+            android:paddingBottom="48dp">
+
+            <TextView
+                android:id="@+id/home_panel_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/lato_bold"
+                android:text="@string/label_home_panel_create_test"
+                android:textColor="@color/sandish"
+                android:textSize="42sp" />
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/question_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:ems="10"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:hint="@string/prompt_question_hint"
+            android:inputType="textPersonName"
+            android:textColor="@color/green_dark" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            tools:listitem="@layout/answer_item" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/cancel_button"
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/accent_rounded_background"
+                android:fontFamily="@font/lato_bold"
+                android:text="@string/action_create_test_cancel"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/create_button"
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/accent_rounded_background"
+                android:fontFamily="@font/lato_bold"
+                android:text="@string/action_create_test_next"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="24sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
