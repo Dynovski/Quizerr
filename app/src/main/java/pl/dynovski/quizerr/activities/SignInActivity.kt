@@ -35,7 +35,6 @@ class SignInActivity: SignActionActivity() {
 
     // Firebase instance variables
     private lateinit var auth: FirebaseAuth
-    private lateinit var database: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +51,6 @@ class SignInActivity: SignActionActivity() {
 
         // Get Firebase instances
         auth = Firebase.auth
-        database = Firebase.firestore
 
         // Adding actions to clickable elements
         signInButton.setOnClickListener {
@@ -112,12 +110,12 @@ class SignInActivity: SignActionActivity() {
                 Toast.makeText(
                     this, R.string.reset_password_email_pending,
                     Toast.LENGTH_SHORT
-                ).show();
+                ).show()
             else if (it.resultCode == RESULT_CANCELED)
                 Toast.makeText(
                     this, R.string.error_reset_password_cancelled,
                     Toast.LENGTH_SHORT
-                ).show();
+                ).show()
         }
 
         signInBinding.forgotPasswordTextView.setOnClickListener {

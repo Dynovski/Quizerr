@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quizer</string>
+    <string name="app_name">Quizerr</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -62,12 +62,18 @@
     <string name="prompt_create_test_date_hint">YYYY-MM-DD</string>
     <string name="prompt_create_test_num_questions">Enter number of questions</string>
     <string name="prompt_create_test_num_questions_hint">Enter number here</string>
+    <string name="prompt_create_test_num_answers">Enter number of answers for each question</string>
+    <string name="prompt_create_test_num_answers_hint">Enter number here</string>
     <string name="action_create_test">Create</string>
     <string name="prompt_answer_hint">Write answer here</string>
     <string name="prompt_question_hint">Write question here</string>
     <string name="prompt_correct">Correct</string>
     <!-- Strings related to courses list -->
     <string name="prompt_course_item_enrolled">Enrolled:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_home_panel_create_question">Question</string>
+    <string name="action_edit">Edit</string>
     <!--        <string name="subscribe">Subscribe</string>-->
     <!--        <string name="unsubscribe">Unsubscribe</string>-->
     <!--        <string name="create_test_question_hint">Question text</string>-->
