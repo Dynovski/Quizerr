@@ -8,7 +8,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.databinding.ActivityAccountDetailsBinding
 
-class AccountDetailsActivity : AppCompatActivity() {
+class AccountDetailsActivity: AppCompatActivity() {
 
     private lateinit var accountDetailsBinding: ActivityAccountDetailsBinding
 

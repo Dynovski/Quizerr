@@ -51,7 +51,7 @@ class HomePanelActivity: AppCompatActivity() {
 
         allCoursesCardView.setOnClickListener {
             Log.d(LOG_TAG, "Selected 'All courses'")
-            startActivity(Intent(this, SignInActivity::class.java))
+            startActivity(Intent(this, CoursesActivity::class.java))
         }
 
         val createCourseLauncher = registerForActivityResult(
@@ -61,12 +61,12 @@ class HomePanelActivity: AppCompatActivity() {
                 Toast.makeText(
                     this, R.string.create_course_success,
                     Toast.LENGTH_SHORT
-                ).show();
+                ).show()
             else if (it.resultCode == RESULT_CANCELED)
                 Toast.makeText(
                     this, R.string.create_course_canceled,
                     Toast.LENGTH_SHORT
-                ).show();
+                ).show()
         }
 
         createCourseCardView.setOnClickListener {
@@ -86,7 +86,7 @@ class HomePanelActivity: AppCompatActivity() {
 
         createTestCardView.setOnClickListener {
             Log.d(LOG_TAG, "Selected 'Create test'")
-            startActivity(Intent(this, SignInActivity::class.java))
+            startActivity(Intent(this, CreateTestActivity::class.java))
         }
 
         myAccountCardView.setOnClickListener {

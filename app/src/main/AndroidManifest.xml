@@ -26,6 +26,7 @@
         <activity android:name=".activities.ResetPasswordActivity" />
         <activity android:name=".activities.AccountDetailsActivity" />
         <activity android:name=".activities.CreateCourseActivity" />
+        <activity android:name=".activities.CoursesActivity" />
     </application>
 
 </manifest>
