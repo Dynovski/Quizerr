@@ -102,7 +102,7 @@ class HomePanelActivity: AppCompatActivity() {
 
         resultsCardView.setOnClickListener {
             Log.d(TAG, "Selected 'Results'")
-            startActivity(Intent(this, SignInActivity::class.java))
+            startActivity(Intent(this, ResultsActivity::class.java))
         }
 
         signOutCardView.setOnClickListener {
@@ -111,7 +111,8 @@ class HomePanelActivity: AppCompatActivity() {
             LoggedUser.logout()
             val intent = Intent(this, SignInActivity::class.java)
             intent.addFlags(
-                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                Intent.FLAG_ACTIVITY_NEW_TASK
+                        or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         or Intent.FLAG_ACTIVITY_CLEAR_TOP
             )
             startActivity(intent)

@@ -2,7 +2,6 @@ package pl.dynovski.quizerr.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.Observer
@@ -15,7 +14,6 @@ import pl.dynovski.quizerr.extensions.afterTextChanged
 import pl.dynovski.quizerr.viewmodels.CreateCourseViewModel
 
 class CreateCourseActivity : AppCompatActivity() {
-    private val LOG_TAG = "CREATE_COURSE"
 
     private lateinit var createCourseBinding: ActivityCreateCourseBinding
     private lateinit var createCourseViewModel: CreateCourseViewModel
