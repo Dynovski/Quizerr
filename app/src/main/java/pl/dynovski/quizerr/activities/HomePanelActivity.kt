@@ -12,9 +12,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.databinding.ActivityHomePanelBinding
+import pl.dynovski.quizerr.singletons.LoggedUser
 
 class HomePanelActivity: AppCompatActivity() {
-    private val LOG_TAG = "HOME_PANEL"
+    private val TAG = "HOME_PANEL"
 
     private lateinit var homePanelBinding: ActivityHomePanelBinding
 
@@ -50,7 +51,7 @@ class HomePanelActivity: AppCompatActivity() {
         signOutCardView = homePanelBinding.signOutCardView
 
         allCoursesCardView.setOnClickListener {
-            Log.d(LOG_TAG, "Selected 'All courses'")
+            Log.d(TAG, "Selected 'All courses'")
             startActivity(Intent(this, CoursesActivity::class.java))
         }
 
@@ -70,43 +71,44 @@ class HomePanelActivity: AppCompatActivity() {
         }
 
         createCourseCardView.setOnClickListener {
-            Log.d(LOG_TAG, "Selected 'Create course'")
+            Log.d(TAG, "Selected 'Create course'")
             createCourseLauncher.launch(Intent(this, CreateCourseActivity::class.java))
         }
 
         myCoursesCardView.setOnClickListener {
-            Log.d(LOG_TAG, "Selected 'My courses'")
-            startActivity(Intent(this, SignInActivity::class.java))
+            Log.d(TAG, "Selected 'My courses'")
+            startActivity(Intent(this, MyCoursesActivity::class.java))
         }
 
         myTestsCardView.setOnClickListener {
-            Log.d(LOG_TAG, "Selected 'My tests'")
+            Log.d(TAG, "Selected 'My tests'")
             startActivity(Intent(this, SignInActivity::class.java))
         }
 
         createTestCardView.setOnClickListener {
-            Log.d(LOG_TAG, "Selected 'Create test'")
+            Log.d(TAG, "Selected 'Create test'")
             startActivity(Intent(this, CreateTestActivity::class.java))
         }
 
         myAccountCardView.setOnClickListener {
-            Log.d(LOG_TAG, "Selected 'My account'")
+            Log.d(TAG, "Selected 'My account'")
             startActivity(Intent(this, AccountDetailsActivity::class.java))
         }
 
         activeTestsCardView.setOnClickListener {
-            Log.d(LOG_TAG, "Selected 'Active tests'")
+            Log.d(TAG, "Selected 'Active tests'")
             startActivity(Intent(this, SignInActivity::class.java))
         }
 
         resultsCardView.setOnClickListener {
-            Log.d(LOG_TAG, "Selected 'Results'")
+            Log.d(TAG, "Selected 'Results'")
             startActivity(Intent(this, SignInActivity::class.java))
         }
 
         signOutCardView.setOnClickListener {
-            Log.d(LOG_TAG, "Selected 'Sign out'")
+            Log.d(TAG, "Selected 'Sign out'")
             auth.signOut()
+            LoggedUser.logout()
             val intent = Intent(this, SignInActivity::class.java)
             intent.addFlags(
                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -119,7 +121,7 @@ class HomePanelActivity: AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(LOG_TAG, "Signed out on HomePanelActivity destroy")
+        Log.d(TAG, "Signed out on HomePanelActivity destroy")
         auth.signOut()
     }
 }

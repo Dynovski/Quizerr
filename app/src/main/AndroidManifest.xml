@@ -27,6 +27,7 @@
         <activity android:name=".activities.AccountDetailsActivity" />
         <activity android:name=".activities.CreateCourseActivity" />
         <activity android:name=".activities.CoursesActivity" />
+        <activity android:name=".activities.MyCoursesActivity" />
     </application>
 
 </manifest>

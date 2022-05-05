@@ -40,6 +40,8 @@ class CreateCourseActivity : AppCompatActivity() {
         courseCreateButton = createCourseBinding.createButton
         courseCancelButton = createCourseBinding.cancelButton
 
+        // TODO: edit course zamiast create course jak cos w intencie zostało przekazane
+
         auth = Firebase.auth
 
         createCourseViewModel.newCourseFormState.observe(this, Observer {

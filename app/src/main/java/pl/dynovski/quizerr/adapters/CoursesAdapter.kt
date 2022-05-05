@@ -5,14 +5,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.databinding.SubscriptionCourseItemBinding
 import pl.dynovski.quizerr.firebaseObjects.Course
 
-class AllCoursesAdapter: RecyclerView.Adapter<AllCoursesAdapter.ViewHolder>() {
+class CoursesAdapter: RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
 
     private var allCourses: Array<Course> = arrayOf()
     private var subscribedCourses: Array<String> = arrayOf()
@@ -25,13 +26,12 @@ class AllCoursesAdapter: RecyclerView.Adapter<AllCoursesAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val course: Course = allCourses.getOrNull(position) ?: return
 
-
         val courseInSubscriptions = subscribedCourses.contains(course.name)
         holder.bind(course, courseInSubscriptions)
 
         holder.subscriptionButton.setOnClickListener {
             val button = it as Button
-            val currentUser = FirebaseAuth.getInstance().currentUser ?: return@setOnClickListener
+            val currentUser = Firebase.auth.currentUser ?: return@setOnClickListener
             if (courseInSubscriptions) {
                 button.setText(R.string.action_join)
                 database.collection("Users")
@@ -77,7 +77,7 @@ class AllCoursesAdapter: RecyclerView.Adapter<AllCoursesAdapter.ViewHolder>() {
         return allCourses.size
     }
 
-    class ViewHolder private constructor(private val binding: SubscriptionCourseItemBinding):
+    class ViewHolder private constructor(binding: SubscriptionCourseItemBinding):
         RecyclerView.ViewHolder(binding.root) {
 
         private val courseNameTextView: TextView = binding.courseNameTextView

@@ -7,14 +7,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pl.dynovski.quizerr.R
-import pl.dynovski.quizerr.adapters.AllCoursesAdapter
+import pl.dynovski.quizerr.adapters.CoursesAdapter
 import pl.dynovski.quizerr.databinding.ActivityRecyclerViewBinding
 import pl.dynovski.quizerr.viewmodels.CoursesViewModel
 
 class CoursesActivity: AppCompatActivity() {
 
     private lateinit var coursesViewModel: CoursesViewModel
-    private lateinit var adapter: AllCoursesAdapter
+    private lateinit var adapter: CoursesAdapter
     private lateinit var binding: ActivityRecyclerViewBinding
 
     private lateinit var recyclerView: RecyclerView
@@ -26,7 +26,7 @@ class CoursesActivity: AppCompatActivity() {
         binding = ActivityRecyclerViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = AllCoursesAdapter()
+        adapter = CoursesAdapter()
         recyclerView = binding.recyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter

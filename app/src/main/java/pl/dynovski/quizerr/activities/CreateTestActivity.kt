@@ -18,7 +18,7 @@ import pl.dynovski.quizerr.firebaseObjects.Answer
 import pl.dynovski.quizerr.firebaseObjects.Question
 import pl.dynovski.quizerr.firebaseObjects.Test
 import pl.dynovski.quizerr.fragments.CreateTestBaseFragment
-import project.android.course.quizer.fragments.CreateQuestionFragment
+import pl.dynovski.quizerr.fragments.CreateTestQuestionFragment
 
 class CreateTestActivity : FragmentActivity() {
     private val TAG = "CREATE_TEST"
@@ -63,7 +63,7 @@ class CreateTestActivity : FragmentActivity() {
     }
 
     fun addQuestionFragment() {
-        adapter.addFragment(CreateQuestionFragment(questionCount++), "Question $questionCount")
+        adapter.addFragment(CreateTestQuestionFragment(questionCount++), "Question $questionCount")
         adapter.notifyItemInserted(questionCount + 1)
     }
 

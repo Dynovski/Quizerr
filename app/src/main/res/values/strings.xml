@@ -79,6 +79,17 @@
     <string name="action_unsubscribe">Unsubscribe</string>
     <string name="action_join">Join</string>
     <string name="action_leave">Leave</string>
+    <string name="label_my_courses">My Courses</string>
+    <string name="edit_course_menu_item">Edit course</string>
+    <string name="delete_course_menu_item">Delete course</string>
+    <string name="add_test_menu_item">Add test</string>
+    <string name="prompt_course_name">Course name</string>
+    <string name="prompt_course_description">Course description</string>
+    <string name="prompt_course_author">Author</string>
+    <string name="edit_course_success">Successfully edited course</string>
+    <string name="edit_course_cancel">Course edit cancelled</string>
+    <string name="edit_course_failed">Course edit failed</string>
+    <string name="sign_in_user_not_exist">User does not exist</string>
     <!--        <string name="subscribe">Subscribe</string>-->
     <!--        <string name="unsubscribe">Unsubscribe</string>-->
     <!--        <string name="create_test_question_hint">Question text</string>-->

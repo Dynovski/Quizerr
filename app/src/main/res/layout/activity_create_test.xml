@@ -20,7 +20,8 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:theme="@style/TabBarTheme"
+            android:background="@color/green_dark"
             app:tabMode="scrollable"
             tools:ignore="SpeakableTextPresentCheck" />
 

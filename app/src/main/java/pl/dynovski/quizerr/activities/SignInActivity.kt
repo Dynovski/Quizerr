@@ -14,16 +14,19 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.databinding.ActivitySignInBinding
 import pl.dynovski.quizerr.extensions.afterTextChanged
+import pl.dynovski.quizerr.firebaseObjects.User
+import pl.dynovski.quizerr.singletons.LoggedUser
 import pl.dynovski.quizerr.viewmodels.LoginViewModel
 
 class SignInActivity: SignActionActivity() {
-    private val LOG_TAG = "SIGN_IN"
+    private val TAG = "SIGN_IN"
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var signInBinding: ActivitySignInBinding
@@ -35,6 +38,7 @@ class SignInActivity: SignActionActivity() {
 
     // Firebase instance variables
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +55,7 @@ class SignInActivity: SignActionActivity() {
 
         // Get Firebase instances
         auth = Firebase.auth
+        database = Firebase.firestore
 
         // Adding actions to clickable elements
         signInButton.setOnClickListener {
@@ -126,18 +131,36 @@ class SignInActivity: SignActionActivity() {
     private fun signIn() {
         val email = emailEditText.text.toString().trim()
         val password = passwordEditText.text.toString().trim()
-        Log.d(LOG_TAG, "login of $email")
+        Log.d(TAG, "login of $email")
 
         showProgressBar()
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task: Task<AuthResult?> ->
                 if (task.isSuccessful) {
-                    Log.d(LOG_TAG, "$email successfully logged in")
+                    Log.d(TAG, "$email successfully logged in")
+                    val userId = auth.currentUser!!.uid
+                    database.collection("Users")
+                        .document(userId)
+                        .get()
+                        .addOnSuccessListener { documentSnapshot: DocumentSnapshot ->
+                            if (documentSnapshot.exists()) {
+                                LoggedUser.login(documentSnapshot.toObject(User::class.java)!!)
+                            } else {
+                                Toast.makeText(
+                                    this@SignInActivity,
+                                    R.string.sign_in_user_not_exist,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                        .addOnFailureListener {
+                            Log.d(TAG, "Could not load read document $it")
+                        }
                     startActivity(Intent(this, HomePanelActivity::class.java))
                     finish()
                 } else {
-                    Log.d(LOG_TAG, "$email login failed", task.exception)
+                    Log.d(TAG, "$email login failed", task.exception)
                     Toast.makeText(
                         applicationContext, R.string.error_sign_in,
                         Toast.LENGTH_SHORT

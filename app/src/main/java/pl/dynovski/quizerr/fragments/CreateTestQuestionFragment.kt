@@ -1,4 +1,4 @@
-package project.android.course.quizer.fragments
+package pl.dynovski.quizerr.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,15 +11,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.activities.CreateTestActivity
-import pl.dynovski.quizerr.databinding.FragmentCreateTestBaseBinding
 import pl.dynovski.quizerr.databinding.FragmentCreateTestQuestionBinding
 import pl.dynovski.quizerr.firebaseObjects.Answer
 import pl.dynovski.quizerr.firebaseObjects.Question
 
-// Fragment used to enter data to create one question and its answers, there are four answers and
-// at least one of them must be correct it is impossible to leave blank question or answers
-class CreateQuestionFragment(private val questionId: Int) : Fragment() {
-    private val LOG_TAG = "CREATE_TEST_QUESTION"
+class CreateTestQuestionFragment(private val questionId: Int): Fragment() {
 
     private lateinit var binding: FragmentCreateTestQuestionBinding
 
@@ -41,7 +37,6 @@ class CreateQuestionFragment(private val questionId: Int) : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentCreateTestQuestionBinding.inflate(layoutInflater)
 
         questionEditText = binding.questionEditText
@@ -89,7 +84,7 @@ class CreateQuestionFragment(private val questionId: Int) : Fragment() {
             }
 
             val question = Question(questionEditText.text.toString())
-            val answers = listOf<Answer>(
+            val answers = listOf(
                 Answer(answer1, correct1),
                 Answer(answer2, correct2),
                 Answer(answer3, correct3),
