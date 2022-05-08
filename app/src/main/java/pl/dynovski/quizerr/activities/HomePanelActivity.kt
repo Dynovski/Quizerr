@@ -97,7 +97,7 @@ class HomePanelActivity: AppCompatActivity() {
 
         activeTestsCardView.setOnClickListener {
             Log.d(TAG, "Selected 'Active tests'")
-            startActivity(Intent(this, SignInActivity::class.java))
+            startActivity(Intent(this, ActiveTestsActivity::class.java))
         }
 
         resultsCardView.setOnClickListener {

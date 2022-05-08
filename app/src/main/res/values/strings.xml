@@ -94,6 +94,8 @@
     <string name="result_course_name">Course</string>
     <string name="result_test_name">Test</string>
     <string name="result_score">Score</string>
+    <string name="action_begin">Begin</string>
+    <string name="label_active_tests">Active tests</string>
     <!--        <string name="subscribe">Subscribe</string>-->
     <!--        <string name="unsubscribe">Unsubscribe</string>-->
     <!--        <string name="create_test_question_hint">Question text</string>-->

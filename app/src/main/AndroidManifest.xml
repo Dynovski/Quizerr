@@ -29,6 +29,7 @@
         <activity android:name=".activities.CoursesActivity" />
         <activity android:name=".activities.MyCoursesActivity" />
         <activity android:name=".activities.ResultsActivity" />
+        <activity android:name=".activities.ActiveTestsActivity" />
     </application>
 
 </manifest>
