@@ -6,8 +6,8 @@ object LoggedUser {
 
     private var user: User? = null
 
-    fun get(): User? {
-        return user
+    fun get(): User {
+        return user!!
     }
 
     fun login(user: User) {

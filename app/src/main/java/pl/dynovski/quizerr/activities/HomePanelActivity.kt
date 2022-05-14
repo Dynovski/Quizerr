@@ -9,9 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.databinding.ActivityHomePanelBinding
+import pl.dynovski.quizerr.firebaseObjects.Course
 import pl.dynovski.quizerr.singletons.LoggedUser
 
 class HomePanelActivity: AppCompatActivity() {
@@ -31,6 +34,7 @@ class HomePanelActivity: AppCompatActivity() {
     private lateinit var signOutCardView: CardView
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +43,7 @@ class HomePanelActivity: AppCompatActivity() {
         setContentView(homePanelBinding.root)
 
         auth = Firebase.auth
+        database = Firebase.firestore
 
         allCoursesCardView = homePanelBinding.allCoursesCardView
         createCourseCardView = homePanelBinding.createCourseCardView
@@ -58,11 +63,26 @@ class HomePanelActivity: AppCompatActivity() {
         val createCourseLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
-            if (it.resultCode == RESULT_OK)
-                Toast.makeText(
-                    this, R.string.create_course_success,
-                    Toast.LENGTH_SHORT
-                ).show()
+            if (it.resultCode == RESULT_OK) {
+                val course = it.data!!.extras!!.get(MyCoursesActivity.COURSE_KEY) as Course
+                database.collection("Courses")
+                    .document()
+                    .set(course)
+                    .addOnSuccessListener {
+                        Toast.makeText(
+                            this,
+                            R.string.create_course_success,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(
+                            this,
+                            R.string.create_course_failed,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+            }
             else if (it.resultCode == RESULT_CANCELED)
                 Toast.makeText(
                     this, R.string.create_course_canceled,

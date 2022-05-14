@@ -22,6 +22,7 @@ import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.databinding.ActivitySignUpBinding
 import pl.dynovski.quizerr.extensions.afterTextChanged
 import pl.dynovski.quizerr.firebaseObjects.User
+import pl.dynovski.quizerr.singletons.LoggedUser
 import pl.dynovski.quizerr.viewmodels.LoginViewModel
 
 class SignUpActivity: SignActionActivity() {
@@ -42,7 +43,7 @@ class SignUpActivity: SignActionActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         signUpBinding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(signUpBinding.root)
 
@@ -118,9 +119,11 @@ class SignUpActivity: SignActionActivity() {
             .addOnCompleteListener { task: Task<AuthResult?> ->
                 if (task.isSuccessful) {
                     Log.d(LOG_TAG, "User for $email successfully created")
-                    // Adding new user to database with lowest privilege and no name
+
                     val userId = auth.currentUser!!.uid
-                    val newUser = User(2, "", userId, email)
+                    val defaultName = email.substringBefore("@")
+                    val newUser = User(defaultName, email, userId)
+                    LoggedUser.login(newUser)
                     database.collection("Users").document(userId).set(newUser)
                     finish()
                     startActivity(Intent(this, HomePanelActivity::class.java))

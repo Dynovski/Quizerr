@@ -6,14 +6,13 @@ import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.firebaseObjects.FirebaseQueryLiveData
 import pl.dynovski.quizerr.singletons.LoggedUser
 
-class CoursesViewModel: ViewModel() {
+class UsersViewModel: ViewModel() {
 
     private val database = Firebase.firestore
     private val currentUser = LoggedUser.get()
-    private val coursesRef = database.collection("Courses")
+    private val usersRef = database.collection("Users")
 
-    val allCourses = FirebaseQueryLiveData(coursesRef)
-    val currentUserCourses = FirebaseQueryLiveData(
-        coursesRef.whereEqualTo("author", currentUser.userId)
-    )
+    fun getUser(userId: String = currentUser.userId): FirebaseQueryLiveData {
+        return FirebaseQueryLiveData(usersRef.whereEqualTo("userId", userId))
+    }
 }

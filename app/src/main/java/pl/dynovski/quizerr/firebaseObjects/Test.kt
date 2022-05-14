@@ -4,8 +4,9 @@ import com.google.firebase.Timestamp
 import java.util.*
 
 data class Test(
-    var testName: String = "",
-    var courseName: String = "",
+    var name: String = "",
     var numQuestions: Int = 0,
-    var dueDate: Timestamp = Timestamp(Date())
+    var dueDate: Timestamp = Timestamp(Date()),
+    var userId: String = "",
+    var courseId: String = "",
 )

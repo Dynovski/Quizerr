@@ -12,19 +12,25 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.adapters.ActiveTestsAdapter
 import pl.dynovski.quizerr.databinding.ActivityRecyclerViewBinding
+import pl.dynovski.quizerr.firebaseObjects.Test
+import pl.dynovski.quizerr.firebaseObjects.User
+import pl.dynovski.quizerr.singletons.LoggedUser
 import pl.dynovski.quizerr.viewmodels.CoursesViewModel
+import pl.dynovski.quizerr.viewmodels.TestsViewModel
+import pl.dynovski.quizerr.viewmodels.UsersViewModel
 import java.util.*
 
 class ActiveTestsActivity: AppCompatActivity() {
 
-    private val TAG = "TESTS_TO_DO"
+    private val TAG = "ACTIVE_TESTS"
 
     private lateinit var adapter: ActiveTestsAdapter
-    private lateinit var coursesViewModel: CoursesViewModel
+    private lateinit var testsViewModel: TestsViewModel
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var headerTextView: TextView
@@ -38,11 +44,19 @@ class ActiveTestsActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         database = Firebase.firestore
-        coursesViewModel = ViewModelProvider(this)[CoursesViewModel::class.java]
+        testsViewModel = ViewModelProvider(this)[TestsViewModel::class.java]
 
-        coursesViewModel.subscribedCourses.observe(this) {
-
-        }
+        database.collection("Users")
+            .document(LoggedUser.get().userId)
+            .get()
+            .addOnSuccessListener { userDocument ->
+                val user = userDocument.toObject(User::class.java) ?: return@addOnSuccessListener
+                testsViewModel.ongoingTests(user.subscribedCoursesIds).observe(this) { querySnapshot ->
+                    val activeTestsDocuments = querySnapshot.documents.filter { !user.completedTestsIds.contains(it.id) }
+                    val activeTests = activeTestsDocuments.map { it.toObject(Test::class.java)!! }.toTypedArray()
+                    adapter.setActiveTests(activeTests)
+                }
+            }
 
         adapter = ActiveTestsAdapter()
         recyclerView = binding.recyclerView

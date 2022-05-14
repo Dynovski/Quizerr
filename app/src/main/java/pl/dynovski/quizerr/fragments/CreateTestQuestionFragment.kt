@@ -31,7 +31,11 @@ class CreateTestQuestionFragment(private val questionId: Int): Fragment() {
     private lateinit var nextButton: Button
 
     private lateinit var parentActivity: CreateTestActivity
+    // TODO: data from activity already added
+    private var wasDataPassedToParent: Boolean = false
 
+    // TODO: viewmodele dla każdego fragmentu, dla textchange ustawianie pola w klasie zdefiniowanej
+    // TODO: na szczycie fragmentu, klasa umieszczana w data, wtedy powinno aktualizować bez wciskania buttona
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -83,7 +87,7 @@ class CreateTestQuestionFragment(private val questionId: Int): Fragment() {
                 return@setOnClickListener
             }
 
-            val question = Question(questionEditText.text.toString())
+            val question = Question(questionEditText.text.toString().trim())
             val answers = listOf(
                 Answer(answer1, correct1),
                 Answer(answer2, correct2),
@@ -91,7 +95,7 @@ class CreateTestQuestionFragment(private val questionId: Int): Fragment() {
                 Answer(answer4, correct4)
             )
 
-            parentActivity.addDataItem(question, answers)
+            parentActivity.setDataItem(questionId, question, answers)
 
             // If final fragment save test to database
             if (parentActivity.test.numQuestions == questionId + 1)

@@ -10,10 +10,12 @@ import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.adapters.CoursesAdapter
 import pl.dynovski.quizerr.databinding.ActivityRecyclerViewBinding
 import pl.dynovski.quizerr.viewmodels.CoursesViewModel
+import pl.dynovski.quizerr.viewmodels.UsersViewModel
 
 class CoursesActivity: AppCompatActivity() {
 
     private lateinit var coursesViewModel: CoursesViewModel
+    private lateinit var usersViewModel: UsersViewModel
     private lateinit var adapter: CoursesAdapter
     private lateinit var binding: ActivityRecyclerViewBinding
 
@@ -41,7 +43,9 @@ class CoursesActivity: AppCompatActivity() {
         coursesViewModel.allCourses.observe(this) { queryDocumentSnapshots ->
             adapter.setAllCourses(queryDocumentSnapshots)
         }
-        coursesViewModel.subscribedCourses.observe(this) { queryDocumentSnapshots ->
+
+        usersViewModel = ViewModelProvider(this)[UsersViewModel::class.java]
+        usersViewModel.getUser().observe(this) { queryDocumentSnapshots ->
             adapter.setSubscribedCourses(queryDocumentSnapshots)
         }
     }

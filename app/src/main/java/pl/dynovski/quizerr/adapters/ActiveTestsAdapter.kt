@@ -38,9 +38,8 @@ class ActiveTestsAdapter: RecyclerView.Adapter<ActiveTestsAdapter.ViewHolder>() 
         super.onViewRecycled(holder)
     }
 
-    fun setActiveTests(snapshot: QuerySnapshot) {
-        val documents = snapshot.documents
-        activeTests = documents.map { it.toObject(Test::class.java)!! }.toTypedArray()
+    fun setActiveTests(activeTests: Array<Test>) {
+        this.activeTests = activeTests
         notifyDataSetChanged()
     }
 
@@ -55,7 +54,7 @@ class ActiveTestsAdapter: RecyclerView.Adapter<ActiveTestsAdapter.ViewHolder>() 
         val beginButton: Button = binding.subscriptionButton
 
         fun bind(test: Test) {
-            testNameTextView.text = test.testName
+            testNameTextView.text = test.name
             beginButton.setText(R.string.action_begin)
         }
 

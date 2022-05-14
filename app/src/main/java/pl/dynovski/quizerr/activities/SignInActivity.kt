@@ -146,6 +146,8 @@ class SignInActivity: SignActionActivity() {
                         .addOnSuccessListener { documentSnapshot: DocumentSnapshot ->
                             if (documentSnapshot.exists()) {
                                 LoggedUser.login(documentSnapshot.toObject(User::class.java)!!)
+                                startActivity(Intent(this, HomePanelActivity::class.java))
+                                finish()
                             } else {
                                 Toast.makeText(
                                     this@SignInActivity,
@@ -155,10 +157,8 @@ class SignInActivity: SignActionActivity() {
                             }
                         }
                         .addOnFailureListener {
-                            Log.d(TAG, "Could not load read document $it")
+                            Log.d(TAG, "Could not load user from firestore\n$it")
                         }
-                    startActivity(Intent(this, HomePanelActivity::class.java))
-                    finish()
                 } else {
                     Log.d(TAG, "$email login failed", task.exception)
                     Toast.makeText(
@@ -175,8 +175,26 @@ class SignInActivity: SignActionActivity() {
 
         // User still logged in
         if (auth.currentUser != null) {
-            startActivity(Intent(this, HomePanelActivity::class.java))
-            finish()
+            val userId = auth.currentUser!!.uid
+            database.collection("Users")
+                .document(userId)
+                .get()
+                .addOnSuccessListener { documentSnapshot: DocumentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                        LoggedUser.login(documentSnapshot.toObject(User::class.java)!!)
+                        startActivity(Intent(this, HomePanelActivity::class.java))
+                        finish()
+                    } else {
+                        Toast.makeText(
+                            this@SignInActivity,
+                            R.string.sign_in_user_not_exist,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+                .addOnFailureListener {
+                    Log.d(TAG, "Could not load user from firestore\n$it")
+                }
         }
     }
 }

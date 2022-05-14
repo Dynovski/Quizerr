@@ -149,7 +149,7 @@
                     android:textSize="30sp" />
 
                 <TextView
-                    android:id="@+id/account_created_courses_text_view"
+                    android:id="@+id/created_courses_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -192,7 +192,7 @@
                     android:textSize="30sp" />
 
                 <TextView
-                    android:id="@+id/account_created_tests_text_view"
+                    android:id="@+id/created_tests_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -235,7 +235,7 @@
                     android:textSize="30sp" />
 
                 <Button
-                    android:id="@+id/account_delete_button"
+                    android:id="@+id/delete_button"
                     style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

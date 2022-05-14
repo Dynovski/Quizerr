@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -27,7 +27,6 @@ class CreateTestActivity : FragmentActivity() {
 
     // Firebase variables
     private lateinit var database: FirebaseFirestore
-    private lateinit var testsRef: CollectionReference
 
     // Layout related variables
     private lateinit var viewPager: ViewPager2
@@ -35,7 +34,7 @@ class CreateTestActivity : FragmentActivity() {
     private lateinit var adapter: ViewPagerAdapter
 
     // Variables holding data to save
-    var data: MutableMap<Question, List<Answer>> = mutableMapOf()
+    var data: MutableMap<Int, Pair<Question, List<Answer>>> = mutableMapOf()
     lateinit var test: Test
 
     // Variable to manage arrayList operations
@@ -52,8 +51,8 @@ class CreateTestActivity : FragmentActivity() {
         tabLayout = createTestBinding.tabLayout
         viewPager = createTestBinding.viewPager
         adapter = ViewPagerAdapter(this)
-        val courseName = intent.extras?.getString("courseName") ?: ""
-        adapter.addFragment(CreateTestBaseFragment(courseName), "Test details")
+        val courseId = intent.extras?.getString("courseId") ?: ""
+        adapter.addFragment(CreateTestBaseFragment(courseId), "Test details")
 
         viewPager.adapter = adapter
 
@@ -68,7 +67,7 @@ class CreateTestActivity : FragmentActivity() {
     }
 
     fun saveTest() {
-        executeBatchedWrite(applicationContext)
+        executeBatchedWrite()
         finish()
     }
 
@@ -80,23 +79,42 @@ class CreateTestActivity : FragmentActivity() {
         viewPager.currentItem -= 1
     }
 
-    fun addDataItem(key: Question, value: List<Answer>) {
-        data[key] = value
+    fun setDataItem(key: Int, question: Question, answers: List<Answer>) {
+        data[key] = Pair(question, answers)
     }
 
-    private fun executeBatchedWrite(context: Context) {
+    private fun executeBatchedWrite() {
         val batch = database.batch()
+
+        val newTest = database.collection("Tests").document()
+        batch[newTest] = test
+
+        val questionsRef = database.collection("Questions")
+        val answersRef = database.collection("Answers")
+
+        for (item in data) {
+            val newQuestion = questionsRef.document()
+            val questionId = newQuestion.id
+            val question = item.value.first
+            question.testId = newTest.id
+            batch[newQuestion] = question
+            for (answer in item.value.second) {
+                val newAnswer = answersRef.document()
+                answer.questionId = questionId
+                batch[newAnswer] = answer
+            }
+        }
 
         batch.commit()
             .addOnSuccessListener {
                 Toast.makeText(
-                    context,
+                    this,
                     "Successfully added new test",
                     Toast.LENGTH_SHORT
                 ).show()
             }
             .addOnFailureListener { e: Exception ->
-                Toast.makeText(context, "Couldn't add new test", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Couldn't add new test", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "Adding new test failed\n$e")
             }
     }

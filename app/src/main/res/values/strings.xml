@@ -58,8 +58,8 @@
     <string name="action_create_test_next">Next</string>
     <string name="prompt_create_test_name">Enter test name</string>
     <string name="prompt_create_test_name_hint">Test name</string>
-    <string name="prompt_create_test_date">Enter deadline for this test</string>
-    <string name="prompt_create_test_date_hint">YYYY-MM-DD</string>
+    <string name="prompt_create_test_date">Pick deadline for this test</string>
+    <string name="prompt_pick_test_date_hint">Click to pick date</string>
     <string name="prompt_create_test_num_questions">Enter number of questions</string>
     <string name="prompt_create_test_num_questions_hint">Enter number here</string>
     <string name="prompt_create_test_num_answers">Enter number of answers for each question</string>
@@ -96,6 +96,12 @@
     <string name="result_score">Score</string>
     <string name="action_begin">Begin</string>
     <string name="label_active_tests">Active tests</string>
+    <string name="action_delete_fail">Account delete failed. Logout and login to application and try again.</string>
+    <string name="action_delete_success">Successfully deleted account</string>
+    <string name="create_course_failed">Failed to create new course</string>
+    <string name="question_delete_course">Do you want to delete this course?</string>
+    <string name="action_yes">Yes</string>
+    <string name="action_no">No</string>
     <!--        <string name="subscribe">Subscribe</string>-->
     <!--        <string name="unsubscribe">Unsubscribe</string>-->
     <!--        <string name="create_test_question_hint">Question text</string>-->

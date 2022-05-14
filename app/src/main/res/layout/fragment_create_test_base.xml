@@ -90,21 +90,18 @@
                     android:textColor="@color/sandish"
                     android:textSize="24sp" />
 
-                <EditText
-                    android:id="@+id/test_deadline_edit_text"
+                <TextView
+                    android:id="@+id/test_deadline_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="12dp"
                     android:layout_marginRight="12dp"
-                    android:layout_marginBottom="8dp"
-                    android:autofillHints=""
-                    android:ems="10"
+                    android:layout_marginBottom="12dp"
                     android:fontFamily="@font/lato"
                     android:gravity="center"
-                    android:hint="@string/prompt_create_test_date_hint"
-                    android:inputType="date"
-                    android:textColor="@color/sandish"
+                    android:text="@string/prompt_pick_test_date_hint"
+                    android:textColor="@color/black"
                     android:textSize="24sp" />
 
                 <TextView

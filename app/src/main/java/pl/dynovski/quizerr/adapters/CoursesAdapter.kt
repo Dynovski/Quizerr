@@ -1,22 +1,27 @@
 package pl.dynovski.quizerr.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.databinding.SubscriptionCourseItemBinding
 import pl.dynovski.quizerr.firebaseObjects.Course
+import pl.dynovski.quizerr.firebaseObjects.User
+import pl.dynovski.quizerr.singletons.LoggedUser
 
 class CoursesAdapter: RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
 
     private var allCourses: Array<Course> = arrayOf()
-    private var subscribedCourses: Array<String> = arrayOf()
+    private var allCoursesIds: Array<String> = arrayOf()
+    private var subscribedCoursesIds: Array<String> = arrayOf()
     private val database = FirebaseFirestore.getInstance()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,33 +30,21 @@ class CoursesAdapter: RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val course: Course = allCourses.getOrNull(position) ?: return
+        val courseId: String = allCoursesIds[position]
 
-        val courseInSubscriptions = subscribedCourses.contains(course.name)
+        val courseInSubscriptions = subscribedCoursesIds.contains(courseId)
         holder.bind(course, courseInSubscriptions)
 
         holder.subscriptionButton.setOnClickListener {
             val button = it as Button
-            val currentUser = Firebase.auth.currentUser ?: return@setOnClickListener
             if (courseInSubscriptions) {
                 button.setText(R.string.action_join)
-                database.collection("Users")
-                    .document(currentUser.uid)
-                    .collection("SubscribedCourses")
-                    .document(course.name).delete()
-                database.collection("Courses").document(course.name)
-                    .collection("EnrolledStudents")
-                    .document(currentUser.uid)
-                    .delete()
+                removeFromSubscribed(courseId)
+                removeUserFromEnrolledUsers(courseId)
             } else {
                 button.setText(R.string.action_leave)
-                database.collection("Users")
-                    .document(currentUser.uid)
-                    .collection("SubscribedCourses")
-                    .document(course.name).set(course)
-                database.collection("Courses").document(course.name)
-                    .collection("EnrolledStudents")
-                    .document(currentUser.uid)
-                    .set(hashMapOf<String, Any>())
+                addToSubscribed(courseId)
+                addUserToEnrolledUsers(courseId)
             }
         }
     }
@@ -61,21 +54,50 @@ class CoursesAdapter: RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
         super.onViewRecycled(holder)
     }
 
+    override fun getItemCount(): Int {
+        return allCourses.size
+    }
+
     fun setAllCourses(snapshot: QuerySnapshot) {
         val documents = snapshot.documents
+        allCoursesIds = documents.map { it.id }.toTypedArray()
         allCourses = documents.map { it.toObject(Course::class.java)!! }.toTypedArray()
         notifyDataSetChanged()
     }
 
     fun setSubscribedCourses(snapshot: QuerySnapshot) {
-        val documents = snapshot.documents
-        subscribedCourses = documents.map { it.toObject(Course::class.java)!!.name }.toTypedArray()
+        val user = snapshot.documents[0].toObject(User::class.java)!!
+        subscribedCoursesIds = user.subscribedCoursesIds.toTypedArray()
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-        return allCourses.size
+    private fun addToSubscribed(courseId: String) {
+        database.collection("Users")
+            .document(LoggedUser.get().userId)
+            .update("subscribedCoursesIds", FieldValue.arrayUnion(courseId))
+            .addOnSuccessListener {
+                LoggedUser.get().subscribedCoursesIds
+            }
     }
+
+    private fun addUserToEnrolledUsers(courseId: String) {
+        database.collection("Courses")
+            .document(courseId)
+            .update("enrolledUsersIds", FieldValue.arrayUnion(LoggedUser.get().userId))
+    }
+
+    private fun removeFromSubscribed(courseId: String) {
+        database.collection("Users")
+            .document(LoggedUser.get().userId)
+            .update("subscribedCoursesIds", FieldValue.arrayRemove(courseId))
+    }
+
+    private fun removeUserFromEnrolledUsers(courseId: String) {
+        database.collection("Courses")
+            .document(courseId)
+            .update("enrolledUsersIds", FieldValue.arrayRemove(LoggedUser.get().userId))
+    }
+
 
     class ViewHolder private constructor(binding: SubscriptionCourseItemBinding):
         RecyclerView.ViewHolder(binding.root) {

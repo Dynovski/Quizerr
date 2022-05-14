@@ -6,42 +6,39 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.QuerySnapshot
 import pl.dynovski.quizerr.databinding.ResultItemBinding
-import pl.dynovski.quizerr.firebaseObjects.CompletedTest
+import pl.dynovski.quizerr.firebaseObjects.TestResult
 
-class ResultsAdapter: RecyclerView.Adapter<ResultsAdapter.ViewHolder>() {
+class ResultsAdapter(): RecyclerView.Adapter<ResultsAdapter.ViewHolder>() {
 
-    private var completedTests: Array<CompletedTest> = arrayOf()
+    private var testResults: Array<TestResult> = arrayOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val test: CompletedTest = completedTests.getOrNull(position) ?: return
-        holder.bind(test)
+        val testResult: TestResult = testResults.getOrNull(position) ?: return
+        holder.bind(testResult)
     }
 
-    fun setCompletedTests(snapshot: QuerySnapshot) {
-        val documents = snapshot.documents
-        completedTests = documents.map { it.toObject(CompletedTest::class.java)!! }.toTypedArray()
+    fun setResults(results: Array<TestResult>) {
+        testResults = results
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
-        return completedTests.size
+        return testResults.size
     }
 
     class ViewHolder private constructor(binding: ResultItemBinding):
         RecyclerView.ViewHolder(binding.root) {
 
-        private val courseNameTextView: TextView = binding.resultCourseNameTextView
         private val testNameTextView: TextView = binding.resultTestNameTextView
         private val scoreTextView: TextView = binding.resultScoreTextView
 
-        fun bind(test: CompletedTest) {
-            courseNameTextView.text = test.courseName
-            testNameTextView.text = test.name
-            scoreTextView.text = "${test.score}/${test.maxScore}"
+        fun bind(testResult: TestResult) {
+            testNameTextView.text = testResult.testName
+            scoreTextView.text = "${testResult.score}/${testResult.maxScore}"
         }
 
         companion object {
