@@ -23,7 +23,7 @@ import pl.dynovski.quizerr.firebaseObjects.Course
 import pl.dynovski.quizerr.singletons.LoggedUser
 import pl.dynovski.quizerr.viewmodels.CoursesViewModel
 
-class MyCoursesActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
+class MyCoursesActivity: AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
 
     private lateinit var coursesViewModel: CoursesViewModel
     private lateinit var adapter: MyCoursesAdapter

@@ -102,6 +102,8 @@
     <string name="question_delete_course">Do you want to delete this course?</string>
     <string name="action_yes">Yes</string>
     <string name="action_no">No</string>
+    <string name="label_choose_course">Choose course</string>
+    <string name="toast_no_courses_available">You have no courses. Create one before creating test.</string>
     <!--        <string name="subscribe">Subscribe</string>-->
     <!--        <string name="unsubscribe">Unsubscribe</string>-->
     <!--        <string name="create_test_question_hint">Question text</string>-->

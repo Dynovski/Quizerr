@@ -107,7 +107,7 @@ class HomePanelActivity: AppCompatActivity() {
 
         createTestCardView.setOnClickListener {
             Log.d(TAG, "Selected 'Create test'")
-            startActivity(Intent(this, CreateTestActivity::class.java))
+            startActivity(Intent(this, ChooseCourseActivity::class.java))
         }
 
         myAccountCardView.setOnClickListener {
