@@ -25,4 +25,14 @@ class ViewPagerAdapter(fActivity: FragmentActivity) : FragmentStateAdapter(fActi
     override fun createFragment(position: Int): Fragment {
         return fragments[position]
     }
+
+    fun getItem(i: Int): Fragment {
+        return fragments[i]
+    }
+
+    fun removeAllFragments() {
+        fragments.clear()
+        fragmentsTitles.clear()
+        notifyDataSetChanged()
+    }
 }

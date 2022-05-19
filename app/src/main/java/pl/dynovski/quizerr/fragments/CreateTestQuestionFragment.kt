@@ -20,14 +20,17 @@ class CreateTestQuestionFragment(private val questionId: Int): Fragment() {
     private lateinit var binding: FragmentCreateTestQuestionBinding
 
     private lateinit var questionEditText: EditText
+
     private lateinit var answer1EditText: EditText
     private lateinit var answer2EditText: EditText
     private lateinit var answer3EditText: EditText
     private lateinit var answer4EditText: EditText
+
     private lateinit var answer1CheckBox: CheckBox
     private lateinit var answer2CheckBox: CheckBox
     private lateinit var answer3CheckBox: CheckBox
     private lateinit var answer4CheckBox: CheckBox
+
     private lateinit var nextButton: Button
 
     private lateinit var parentActivity: CreateTestActivity

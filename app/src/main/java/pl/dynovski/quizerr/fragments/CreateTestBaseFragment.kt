@@ -113,5 +113,4 @@ class CreateTestBaseFragment(private var courseId: String): Fragment() {
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         dueDateTextView.text = sdf.format(calendar.time)
     }
-
 }

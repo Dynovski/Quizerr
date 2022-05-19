@@ -1,6 +1,5 @@
 package pl.dynovski.quizerr.activities
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -8,7 +7,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -23,7 +21,7 @@ import pl.dynovski.quizerr.fragments.CreateTestQuestionFragment
 class CreateTestActivity : FragmentActivity() {
     private val TAG = "CREATE_TEST"
 
-    private lateinit var createTestBinding: ActivityCreateTestBinding
+    private lateinit var binding: ActivityCreateTestBinding
 
     // Firebase variables
     private lateinit var database: FirebaseFirestore
@@ -43,13 +41,13 @@ class CreateTestActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        createTestBinding = ActivityCreateTestBinding.inflate(layoutInflater)
-        setContentView(createTestBinding.root)
+        binding = ActivityCreateTestBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         database = Firebase.firestore
 
-        tabLayout = createTestBinding.tabLayout
-        viewPager = createTestBinding.viewPager
+        tabLayout = binding.tabLayout
+        viewPager = binding.viewPager
         adapter = ViewPagerAdapter(this)
         val courseId = intent.extras?.getString("courseId") ?: ""
         adapter.addFragment(CreateTestBaseFragment(courseId), "Test details")

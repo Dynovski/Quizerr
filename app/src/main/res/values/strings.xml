@@ -104,6 +104,13 @@
     <string name="action_no">No</string>
     <string name="label_choose_course">Choose course</string>
     <string name="toast_no_courses_available">You have no courses. Create one before creating test.</string>
+    <string name="label_solve_test">Solve test</string>
+    <string name="prompt_solve_test_date">Test must be finished before:</string>
+    <string name="prompt_solve_test_num_questions">Number of questions:</string>
+    <string name="action_test_begin">Begin</string>
+    <string name="action_solve_test_back">Back</string>
+    <string name="prompt_scored">Your score:</string>
+    <string name="action_finish">Finish</string>
     <!--        <string name="subscribe">Subscribe</string>-->
     <!--        <string name="unsubscribe">Unsubscribe</string>-->
     <!--        <string name="create_test_question_hint">Question text</string>-->

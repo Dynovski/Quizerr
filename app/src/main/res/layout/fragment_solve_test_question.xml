@@ -38,22 +38,20 @@
 
         </RelativeLayout>
 
-        <EditText
-            android:id="@+id/question_edit_text"
+        <TextView
+            android:id="@+id/question_text_view"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:autofillHints=""
-            android:ems="10"
+            android:textColor="@color/green_dark"
             android:fontFamily="@font/lato"
-            android:gravity="center|bottom"
-            android:hint="@string/prompt_question_hint"
-            android:inputType="textPersonName"
-            android:textColor="@color/green_dark" />
+            android:gravity="center"
+            android:lines="4"
+            android:textSize="20sp"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="4dp"
@@ -64,7 +62,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingStart="8dp"
                 android:paddingTop="12dp"
@@ -81,15 +80,14 @@
                     android:textColor="@color/sandish"
                     android:textSize="26sp" />
 
-                <EditText
-                    android:id="@+id/answer_edit_text1"
+                <TextView
+                    android:id="@+id/answer1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="8"
-                    android:ems="10"
-                    android:hint="@string/prompt_answer_hint"
-                    android:inputType="textPersonName"
-                    android:minHeight="48dp"
+                    android:fontFamily="@font/lato"
+                    android:gravity="center"
+                    android:lines="2"
                     android:textColor="@color/sandish"
                     android:textSize="18sp" />
 
@@ -107,7 +105,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="4dp"
@@ -118,7 +116,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingStart="8dp"
                 android:paddingTop="12dp"
@@ -135,15 +134,14 @@
                     android:textColor="@color/sandish"
                     android:textSize="26sp" />
 
-                <EditText
-                    android:id="@+id/answer_edit_text2"
+                <TextView
+                    android:id="@+id/answer2"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="8"
-                    android:ems="10"
-                    android:hint="@string/prompt_answer_hint"
-                    android:inputType="textPersonName"
-                    android:minHeight="48dp"
+                    android:fontFamily="@font/lato"
+                    android:gravity="center"
+                    android:lines="2"
                     android:textColor="@color/sandish"
                     android:textSize="18sp" />
 
@@ -161,7 +159,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="4dp"
@@ -172,7 +170,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingStart="8dp"
                 android:paddingTop="12dp"
@@ -189,15 +188,14 @@
                     android:textColor="@color/sandish"
                     android:textSize="26sp" />
 
-                <EditText
-                    android:id="@+id/answer_edit_text3"
+                <TextView
+                    android:id="@+id/answer3"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="8"
-                    android:ems="10"
-                    android:hint="@string/prompt_answer_hint"
-                    android:inputType="textPersonName"
-                    android:minHeight="48dp"
+                    android:fontFamily="@font/lato"
+                    android:gravity="center"
+                    android:lines="2"
                     android:textColor="@color/sandish"
                     android:textSize="18sp" />
 
@@ -215,7 +213,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="4dp"
@@ -226,7 +224,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingStart="8dp"
                 android:paddingTop="12dp"
@@ -243,15 +242,14 @@
                     android:textColor="@color/sandish"
                     android:textSize="26sp" />
 
-                <EditText
-                    android:id="@+id/answer_edit_text4"
+                <TextView
+                    android:id="@+id/answer4"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="8"
-                    android:ems="10"
-                    android:hint="@string/prompt_answer_hint"
-                    android:inputType="textPersonName"
-                    android:minHeight="48dp"
+                    android:fontFamily="@font/lato"
+                    android:gravity="center"
+                    android:lines="2"
                     android:textColor="@color/sandish"
                     android:textSize="18sp" />
 
@@ -271,11 +269,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="16dp"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <Button
-                android:id="@+id/cancel_button"
+                android:id="@+id/back_button"
                 style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -283,13 +281,13 @@
                 android:layout_weight="1"
                 android:background="@drawable/accent_rounded_background"
                 android:fontFamily="@font/lato_bold"
-                android:text="@string/action_create_test_cancel"
+                android:text="@string/action_solve_test_back"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/create_button"
+                android:id="@+id/next_button"
                 style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
