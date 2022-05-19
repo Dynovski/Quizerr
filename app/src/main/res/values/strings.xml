@@ -80,6 +80,7 @@
     <string name="action_join">Join</string>
     <string name="action_leave">Leave</string>
     <string name="label_my_courses">My Courses</string>
+    <string name="label_my_tests">My Tests</string>
     <string name="edit_course_menu_item">Edit course</string>
     <string name="delete_course_menu_item">Delete course</string>
     <string name="add_test_menu_item">Add test</string>

@@ -6,6 +6,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
 import pl.dynovski.quizerr.firebaseObjects.FirebaseQueryLiveData
+import pl.dynovski.quizerr.singletons.LoggedUser
 
 class TestsViewModel: ViewModel() {
 
@@ -21,4 +22,8 @@ class TestsViewModel: ViewModel() {
                 .whereGreaterThan("dueDate", Timestamp(Date()))
         )
     }
+
+    val currentUserTests = FirebaseQueryLiveData(
+        testsRef.whereEqualTo("userId", LoggedUser.get().userId)
+    )
 }
