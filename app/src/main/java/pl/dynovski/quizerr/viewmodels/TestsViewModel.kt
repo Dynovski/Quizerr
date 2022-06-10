@@ -18,7 +18,7 @@ class TestsViewModel: ViewModel() {
     fun ongoingTests(courseIds: List<String>): FirebaseQueryLiveData {
         return FirebaseQueryLiveData(
             database.collection("Tests")
-                .whereIn("CourseId", courseIds)
+                .whereIn("courseId", courseIds)
                 .whereGreaterThan("dueDate", Timestamp(Date()))
         )
     }

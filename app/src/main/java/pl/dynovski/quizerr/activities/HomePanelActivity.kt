@@ -9,12 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.databinding.ActivityHomePanelBinding
 import pl.dynovski.quizerr.firebaseObjects.Course
+import pl.dynovski.quizerr.firebaseObjects.User
 import pl.dynovski.quizerr.singletons.LoggedUser
 
 class HomePanelActivity: AppCompatActivity() {
@@ -74,6 +76,15 @@ class HomePanelActivity: AppCompatActivity() {
                             R.string.create_course_success,
                             Toast.LENGTH_SHORT
                         ).show()
+                        database.collection("Users")
+                            .document(LoggedUser.get().userId)
+                            .update("numCreatedCourses", FieldValue.increment(1))
+                            .addOnSuccessListener {
+                                Log.d(TAG, "Incremented numCreatedCourses")
+                            }
+                            .addOnFailureListener {
+                                Log.d(TAG, "Could not increment numCreatedCourses\n$it")
+                            }
                     }
                     .addOnFailureListener {
                         Toast.makeText(

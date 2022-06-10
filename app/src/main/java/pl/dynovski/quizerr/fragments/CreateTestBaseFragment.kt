@@ -99,10 +99,14 @@ class CreateTestBaseFragment(private var courseId: String): Fragment() {
                     courseId
                 )
             }
-            if (parentActivity.data.keys.isEmpty()) {
+            if (parentActivity.numFragments() == 1) {
                 parentActivity.addQuestionFragment()
                 parentActivity.moveToNextPage()
             }
+        }
+
+        cancelButton.setOnClickListener {
+            parentActivity.finish()
         }
 
         return binding.root

@@ -1,9 +1,12 @@
 package pl.dynovski.quizerr.fragments
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.databinding.FragmentCourseDetailsDialogBinding
 import pl.dynovski.quizerr.firebaseObjects.Course
 
@@ -21,6 +24,9 @@ class CourseDetailsDialogFragment(val course: Course): DialogFragment() {
         binding.courseAuthorTextView.text = course.author
         binding.courseDescriptionTextView.text = course.description
 
-        return builder.create()
+        val dialog = builder.create()
+        dialog.window?.setBackgroundDrawableResource(R.drawable.main_rounded_background);
+
+        return dialog
     }
 }

@@ -35,4 +35,8 @@ class ViewPagerAdapter(fActivity: FragmentActivity) : FragmentStateAdapter(fActi
         fragmentsTitles.clear()
         notifyDataSetChanged()
     }
+
+    fun numFragments(): Int {
+        return fragments.count()
+    }
 }

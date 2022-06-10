@@ -14,6 +14,6 @@ class CoursesViewModel: ViewModel() {
 
     val allCourses = FirebaseQueryLiveData(coursesRef)
     val currentUserCourses = FirebaseQueryLiveData(
-        coursesRef.whereEqualTo("author", currentUser.userId)
+        coursesRef.whereEqualTo("userId", currentUser.userId)
     )
 }

@@ -46,6 +46,9 @@ class ResultsActivity: AppCompatActivity() {
 
         testResultsViewModel = ViewModelProvider(this)[TestResultsViewModel::class.java]
         testResultsViewModel.getTestResults(LoggedUser.get().userId).observe(this) {
+            if (it.documents.isEmpty())
+                return@observe
+
             val results = it.documents.map { it.toObject(TestResult::class.java)!! }
             val resultsByCourseId = results.groupBy { it.courseId }
 

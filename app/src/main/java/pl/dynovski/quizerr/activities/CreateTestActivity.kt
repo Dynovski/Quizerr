@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -17,6 +18,7 @@ import pl.dynovski.quizerr.firebaseObjects.Question
 import pl.dynovski.quizerr.firebaseObjects.Test
 import pl.dynovski.quizerr.fragments.CreateTestBaseFragment
 import pl.dynovski.quizerr.fragments.CreateTestQuestionFragment
+import pl.dynovski.quizerr.singletons.LoggedUser
 
 class CreateTestActivity : FragmentActivity() {
     private val TAG = "CREATE_TEST"
@@ -49,7 +51,7 @@ class CreateTestActivity : FragmentActivity() {
         tabLayout = binding.tabLayout
         viewPager = binding.viewPager
         adapter = ViewPagerAdapter(this)
-        val courseId = intent.extras?.getString("courseId") ?: ""
+        val courseId = intent.extras?.getString(MyCoursesActivity.COURSE_ID_KEY) ?: return
         adapter.addFragment(CreateTestBaseFragment(courseId), "Test details")
 
         viewPager.adapter = adapter
@@ -75,6 +77,10 @@ class CreateTestActivity : FragmentActivity() {
 
     fun moveToPreviousPage() {
         viewPager.currentItem -= 1
+    }
+
+    fun numFragments(): Int {
+        return adapter.numFragments()
     }
 
     fun setDataItem(key: Int, question: Question, answers: List<Answer>) {
@@ -110,6 +116,15 @@ class CreateTestActivity : FragmentActivity() {
                     "Successfully added new test",
                     Toast.LENGTH_SHORT
                 ).show()
+                database.collection("Users")
+                    .document(LoggedUser.get().userId)
+                    .update("numCreatedTests", FieldValue.increment(1))
+                    .addOnSuccessListener {
+                        Log.d(TAG, "Incremented numCreatedTests")
+                    }
+                    .addOnFailureListener {
+                        Log.d(TAG, "Could not increment numCreatedTests\n$it")
+                    }
             }
             .addOnFailureListener { e: Exception ->
                 Toast.makeText(this, "Couldn't add new test", Toast.LENGTH_SHORT).show()

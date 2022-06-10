@@ -55,7 +55,8 @@ class ChooseCourseActivity: AppCompatActivity() {
 
     fun startTestCreationFor(courseId: String) {
         intent = Intent(this, CreateTestActivity::class.java)
-        intent.putExtra("courseId", courseId)
+        intent.putExtra(MyCoursesActivity.COURSE_ID_KEY, courseId)
         startActivity(intent)
+        finish()
     }
 }
