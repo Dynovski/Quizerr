@@ -99,7 +99,6 @@ class MyCoursesActivity: AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
                 builder.setPositiveButton(R.string.action_yes) { dialog: DialogInterface, _: Int ->
                     dialog.dismiss()
                     deleteTestsRelatedTo(selectedCourseId)
-                    deleteCourseFromSubscribedCourses(selectedCourseId)
                     deleteCourse(selectedCourseId)
                 }
                 builder.setNegativeButton(R.string.action_no) { dialog: DialogInterface, _: Int ->
@@ -118,33 +117,30 @@ class MyCoursesActivity: AppCompatActivity(), PopupMenu.OnMenuItemClickListener 
         }
     }
 
-    private fun deleteCourseFromSubscribedCourses(courseId: String) {
+    private fun deleteCourse(courseId: String) {
         database.collection("Courses")
             .document(courseId)
             .get()
             .addOnSuccessListener {
-                val enrolledUsersIds = it.get("EnrolledUsersIds") as? List<String> ?: return@addOnSuccessListener
+                val enrolledUsersIds = it.get("enrolledUsersIds") as? List<String> ?: return@addOnSuccessListener
                 for (userId in enrolledUsersIds) {
                     database.collection("Users")
                         .document(userId)
-                        .update("SubscribedCoursesIds", FieldValue.arrayRemove(userId))
+                        .update("subscribedCoursesIds", FieldValue.arrayRemove(courseId))
                         .addOnSuccessListener {
                             Log.d(TAG, "Deleted $courseId from subscribed courses of $userId")
                         }
                 }
-            }
-    }
-
-    private fun deleteCourse(courseId: String) {
-        database.collection("Courses")
-            .document(courseId)
-            .delete()
-            .addOnSuccessListener {
-                Log.d(TAG,"Successfully deleted course from courses")
-                database.collection("Users")
-            }
-            .addOnFailureListener {
-                Log.d(TAG, "Couldn't delete course from courses\n$it")
+                database.collection("Courses")
+                    .document(courseId)
+                    .delete()
+                    .addOnSuccessListener {
+                        Log.d(TAG,"Successfully deleted course from courses")
+                        database.collection("Users")
+                    }
+                    .addOnFailureListener {
+                        Log.d(TAG, "Couldn't delete course from courses\n$it")
+                    }
             }
     }
 
