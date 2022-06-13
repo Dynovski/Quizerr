@@ -39,7 +39,6 @@ class SolveTestActivity: FragmentActivity() {
     private lateinit var data: MutableMap<Int, Pair<Question, List<Answer>>>
     private lateinit var testName: String
     private lateinit var testId: String
-    private lateinit var userId: String
     private lateinit var courseId: String
     private lateinit var dueDate: Timestamp
     private var numOfQuestions: Int = 0
@@ -55,7 +54,6 @@ class SolveTestActivity: FragmentActivity() {
         dueDate = intent.getParcelableExtra<Timestamp>(TEST_DATE_KEY) as Timestamp
         testId = intent.getStringExtra(TEST_ID_KEY)!!
         courseId = intent.getStringExtra(TEST_COURSE_ID_KEY)!!
-        userId = intent.getStringExtra(TEST_USER_ID_KEY)!!
 
         getTestData()
 
@@ -117,7 +115,7 @@ class SolveTestActivity: FragmentActivity() {
             Timestamp(Date()),
             testId,
             courseId,
-            userId
+            LoggedUser.get().userId
         )
         database.collection("TestResults")
             .document()
