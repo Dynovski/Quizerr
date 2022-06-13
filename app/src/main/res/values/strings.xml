@@ -59,7 +59,7 @@
     <string name="prompt_create_test_name">Enter test name</string>
     <string name="prompt_create_test_name_hint">Test name</string>
     <string name="prompt_create_test_date">Pick deadline for this test</string>
-    <string name="prompt_pick_test_date_hint">Click to pick date</string>
+    <string name="prompt_pick_test_date_hint"><u>Click to pick date</u></string>
     <string name="prompt_create_test_num_questions">Enter number of questions</string>
     <string name="prompt_create_test_num_questions_hint">Enter number here</string>
     <string name="prompt_create_test_num_answers">Enter number of answers for each question</string>
