@@ -40,6 +40,8 @@ class SignUpActivity: SignActionActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
 
+    private var canRegister = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -59,9 +61,14 @@ class SignUpActivity: SignActionActivity() {
 
         // Adding actions to clickable elements
         signUpButton.setOnClickListener {
-            hideKeyboard(signUpBinding.root)
-            createAccount()
+            if (canRegister) {
+                hideKeyboard(signUpBinding.root)
+                createAccount()
+            }
         }
+
+        signUpButton.alpha = 0.5f
+
         signUpBinding.loginTextView.setOnClickListener {
             finish()
             startActivity(Intent(this, SignInActivity::class.java))
@@ -72,7 +79,8 @@ class SignUpActivity: SignActionActivity() {
             val loginState = it ?: return@Observer
 
             // disable login button unless both username / password is valid
-            signUpButton.isEnabled = loginState.isDataValid
+            canRegister = loginState.isDataValid
+            signUpButton.alpha = if (canRegister) 1.0f else 0.5f
 
             if (loginState.emailError != null) {
                 emailEditText.error = getString(loginState.emailError)

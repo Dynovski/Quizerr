@@ -11,7 +11,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.databinding.ActivityResetPasswordBinding
 
-class ResetPasswordActivity: SignActionActivity() {
+class ResetPasswordActivity : SignActionActivity() {
     private val LOG_TAG = "RESET_PASSWORD"
 
     private lateinit var resetPasswordBinding: ActivityResetPasswordBinding
@@ -40,6 +40,9 @@ class ResetPasswordActivity: SignActionActivity() {
     private fun resetPassword() {
         val email = emailEditText.text.toString().trim()
         Log.d(LOG_TAG, "reset password for $email")
+
+        if (email.isEmpty())
+            return
 
         showProgressBar()
         auth.sendPasswordResetEmail(email)

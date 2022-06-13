@@ -24,6 +24,7 @@ import pl.dynovski.quizerr.extensions.afterTextChanged
 import pl.dynovski.quizerr.firebaseObjects.User
 import pl.dynovski.quizerr.singletons.LoggedUser
 import pl.dynovski.quizerr.viewmodels.LoginViewModel
+import kotlin.math.sign
 
 class SignInActivity: SignActionActivity() {
     private val TAG = "SIGN_IN"
@@ -39,6 +40,8 @@ class SignInActivity: SignActionActivity() {
     // Firebase instance variables
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
+
+    private var canLogin = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,9 +62,14 @@ class SignInActivity: SignActionActivity() {
 
         // Adding actions to clickable elements
         signInButton.setOnClickListener {
-            hideKeyboard(signInBinding.root)
-            signIn()
+            if (canLogin) {
+                hideKeyboard(signInBinding.root)
+                signIn()
+            }
         }
+
+        signInButton.alpha = 0.5f
+
         signInBinding.registerTextView.setOnClickListener {
             finish()
             startActivity(Intent(this, SignUpActivity::class.java))
@@ -72,7 +80,8 @@ class SignInActivity: SignActionActivity() {
             val loginState = it ?: return@Observer
 
             // disable login button unless both username / password is valid
-            signInButton.isEnabled = loginState.isDataValid
+            canLogin = loginState.isDataValid
+            signInButton.alpha = if (canLogin) 1.0f else 0.5f
 
             if (loginState.emailError != null) {
                 emailEditText.error = getString(loginState.emailError)
