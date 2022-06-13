@@ -7,11 +7,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.google.firebase.Timestamp
 import pl.dynovski.quizerr.activities.SolveTestActivity
 import pl.dynovski.quizerr.databinding.FragmentSolveTestBaseBinding
 import pl.dynovski.quizerr.firebaseObjects.Test
+import java.text.SimpleDateFormat
 
-class SolveTestBaseFragment(private val test: Test): Fragment() {
+class SolveTestBaseFragment(
+    private val testName: String,
+    private val testDueDate: Timestamp,
+    private val numQuestions: Int
+): Fragment() {
 
     private lateinit var binding: FragmentSolveTestBaseBinding
 
@@ -34,9 +40,9 @@ class SolveTestBaseFragment(private val test: Test): Fragment() {
         dueDateTextView = binding.testDeadlineTextView
         numOfQuestionsTextView = binding.testNumQuestionsTextView
 
-        testNameTextView.text = test.name
-        dueDateTextView.text = test.dueDate.toString()
-        numOfQuestionsTextView.text = test.numQuestions.toString()
+        testNameTextView.text = testName
+        dueDateTextView.text = SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(testDueDate.toDate())
+        numOfQuestionsTextView.text = numQuestions.toString()
 
         val solveTestActivity = activity as SolveTestActivity
 
@@ -46,6 +52,9 @@ class SolveTestBaseFragment(private val test: Test): Fragment() {
 
         beginButton.setOnClickListener {
             solveTestActivity.addQuestionFragments()
+            solveTestActivity.moveToNextPage()
+            beginButton.visibility = View.GONE
+            cancelButton.visibility = View.GONE
         }
 
         return binding.root

@@ -53,8 +53,7 @@ class ActiveTestsActivity: AppCompatActivity() {
                 val user = userDocument.toObject(User::class.java) ?: return@addOnSuccessListener
                 testsViewModel.ongoingTests(user.subscribedCoursesIds).observe(this) { querySnapshot ->
                     val activeTestsDocuments = querySnapshot.documents.filter { !user.completedTestsIds.contains(it.id) }
-                    val activeTests = activeTestsDocuments.map { it.toObject(Test::class.java)!! }.toTypedArray()
-                    adapter.setActiveTests(activeTests)
+                    adapter.setActiveTests(activeTestsDocuments)
                 }
             }
 

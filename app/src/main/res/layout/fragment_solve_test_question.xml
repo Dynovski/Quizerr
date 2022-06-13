@@ -49,7 +49,7 @@
                 android:fontFamily="@font/lato"
                 android:gravity="center"
                 android:lines="4"
-                android:textColor="@color/green_dark"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
 
             <androidx.cardview.widget.CardView
@@ -89,8 +89,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="8"
                         android:fontFamily="@font/lato"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:lines="2"
+                        android:minHeight="48dp"
                         android:textColor="@color/sandish"
                         android:textSize="18sp" />
 
@@ -143,8 +144,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="8"
                         android:fontFamily="@font/lato"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:lines="2"
+                        android:minHeight="48dp"
                         android:textColor="@color/sandish"
                         android:textSize="18sp" />
 
@@ -197,8 +199,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="8"
                         android:fontFamily="@font/lato"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:lines="2"
+                        android:minHeight="48dp"
                         android:textColor="@color/sandish"
                         android:textSize="18sp" />
 
@@ -251,8 +254,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="8"
                         android:fontFamily="@font/lato"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:lines="2"
+                        android:minHeight="48dp"
                         android:textColor="@color/sandish"
                         android:textSize="18sp" />
 
@@ -276,20 +280,6 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/back_button"
-                    style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/accent_rounded_background"
-                    android:fontFamily="@font/lato_bold"
-                    android:text="@string/action_solve_test_back"
-                    android:textAllCaps="false"
-                    android:textColor="#fff"
-                    android:textSize="24sp" />
-
-                <Button
                     android:id="@+id/next_button"
                     style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
                     android:layout_width="0dp"
@@ -298,10 +288,11 @@
                     android:layout_weight="1"
                     android:background="@drawable/accent_rounded_background"
                     android:fontFamily="@font/lato_bold"
-                    android:text="@string/action_create_test_next"
+                    android:text="@string/action_finish"
                     android:textAllCaps="false"
                     android:textColor="#fff"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

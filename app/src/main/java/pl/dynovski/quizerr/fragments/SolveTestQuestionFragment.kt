@@ -15,7 +15,8 @@ import pl.dynovski.quizerr.firebaseObjects.Question
 
 class SolveTestQuestionFragment(
     private val question: Question,
-    private val answers: List<Answer>
+    private val answers: List<Answer>,
+    private val questionId: Int
 ): Fragment() {
 
     private lateinit var binding: FragmentSolveTestQuestionBinding
@@ -32,8 +33,7 @@ class SolveTestQuestionFragment(
     private lateinit var answer3CheckBox: CheckBox
     private lateinit var answer4CheckBox: CheckBox
 
-    private lateinit var backButton: Button
-    private lateinit var nextButton: Button
+    private lateinit var finishButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,8 +54,7 @@ class SolveTestQuestionFragment(
         answer3CheckBox = binding.answerCheckBox3
         answer4CheckBox = binding.answerCheckBox4
 
-        backButton = binding.backButton
-        nextButton = binding.nextButton
+        finishButton = binding.nextButton
 
         val solveTestActivity = activity as SolveTestActivity
 
@@ -66,12 +65,13 @@ class SolveTestQuestionFragment(
         answer3TextView.text = answers[2].text
         answer4TextView.text = answers[3].text
 
-        backButton.setOnClickListener {
-            solveTestActivity.moveToPreviousPage()
-        }
 
-        nextButton.setOnClickListener {
-            solveTestActivity.moveToNextPage()
+        if (solveTestActivity.getNumQuestions() == questionId + 1) {
+            finishButton.visibility = View.VISIBLE
+            finishButton.setOnClickListener {
+                finishButton.visibility = View.GONE
+                solveTestActivity.checkTest()
+            }
         }
 
         return binding.root

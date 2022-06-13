@@ -1,20 +1,27 @@
 package pl.dynovski.quizerr.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.DocumentSnapshot
 import pl.dynovski.quizerr.R
+import pl.dynovski.quizerr.activities.ActiveTestsActivity
+import pl.dynovski.quizerr.activities.SolveTestActivity
 import pl.dynovski.quizerr.databinding.SubscriptionCourseItemBinding
 import pl.dynovski.quizerr.firebaseObjects.Test
 
 class ActiveTestsAdapter: RecyclerView.Adapter<ActiveTestsAdapter.ViewHolder>() {
 
     private var activeTests: Array<Test> = arrayOf()
+    private var activeTestsIds: Array<String> = arrayOf()
+    private lateinit var parent: ActiveTestsActivity
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        this.parent = parent.context as ActiveTestsActivity
         return ViewHolder.from(parent)
     }
 
@@ -22,15 +29,16 @@ class ActiveTestsAdapter: RecyclerView.Adapter<ActiveTestsAdapter.ViewHolder>() 
         val test: Test = activeTests.getOrNull(position) ?: return
         holder.bind(test)
 
-//        holder.beginButton.setOnClickListener {
-//            val solveTestIntent = Intent(it.context, SolveTestActivity::class.java)
-//            solveTestIntent.putExtra("testName", test.testName)
-//            solveTestIntent.putExtra("numOfQuestions", test.numQuestions)
-//            solveTestIntent.putExtra("deadline", test.dueDate)
-//            solveTestIntent.putExtra("courseName", test.courseName)
-//            solveTestIntent.putExtra("courseName", test.author)
-//            it.context.startActivity(solveTestIntent)
-//        }
+        holder.beginButton.setOnClickListener {
+            val solveTestIntent = Intent(parent, SolveTestActivity::class.java)
+            solveTestIntent.putExtra(SolveTestActivity.TEST_NAME_KEY, test.name)
+            solveTestIntent.putExtra(SolveTestActivity.TEST_QUESTIONS_KEY, test.numQuestions)
+            solveTestIntent.putExtra(SolveTestActivity.TEST_DATE_KEY, test.dueDate)
+            solveTestIntent.putExtra(SolveTestActivity.TEST_ID_KEY, activeTestsIds[position])
+            solveTestIntent.putExtra(SolveTestActivity.TEST_COURSE_ID_KEY, test.courseId)
+            solveTestIntent.putExtra(SolveTestActivity.TEST_USER_ID_KEY, test.userId)
+            parent.startActivity(solveTestIntent)
+        }
     }
 
     override fun onViewRecycled(holder: ViewHolder) {
@@ -38,8 +46,9 @@ class ActiveTestsAdapter: RecyclerView.Adapter<ActiveTestsAdapter.ViewHolder>() 
         super.onViewRecycled(holder)
     }
 
-    fun setActiveTests(activeTests: Array<Test>) {
-        this.activeTests = activeTests
+    fun setActiveTests(documents: List<DocumentSnapshot>) {
+        activeTestsIds = documents.map { it.id }.toTypedArray()
+        activeTests = documents.map { it.toObject(Test::class.java)!! }.toTypedArray()
         notifyDataSetChanged()
     }
 
