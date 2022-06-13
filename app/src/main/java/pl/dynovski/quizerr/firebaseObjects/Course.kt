@@ -3,9 +3,9 @@ package pl.dynovski.quizerr.firebaseObjects
 import java.io.Serializable
 
 data class Course(
-    val name: String = "",
+    var name: String = "",
     val author: String = "",
-    val description: String = "",
+    var description: String = "",
     val userId: String = "",
     val enrolledUsersIds: List<String> = listOf()
 ): Serializable

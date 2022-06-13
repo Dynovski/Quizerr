@@ -44,10 +44,10 @@ class CreateCourseActivity : AppCompatActivity() {
         courseCreateButton = createCourseBinding.createButton
         courseCancelButton = createCourseBinding.cancelButton
 
-        // TODO: edit course zamiast create course jak cos w intencie zostało przekazane
-
         auth = Firebase.auth
         database = Firebase.firestore
+
+        val course = intent.extras?.get(MyCoursesActivity.COURSE_KEY) as? Course
 
         createCourseViewModel.newCourseFormState.observe(this, Observer {
             val newCourseState = it ?: return@Observer
@@ -76,21 +76,33 @@ class CreateCourseActivity : AppCompatActivity() {
             )
         }
 
+        if (course != null) {
+            courseNameEditText.setText(course.name)
+            courseDescriptionEditText.setText(course.description)
+        }
+
         courseCancelButton.setOnClickListener {
             setResult(RESULT_CANCELED)
             finish()
         }
 
         courseCreateButton.setOnClickListener {
-            // TODO: potrzebny bedzie property course zeby ustawiac na on create z intentu lub tworzyc nowy
-            val course = Course(
-                courseNameEditText.text.toString(),
-                LoggedUser.get().name,
-                courseDescriptionEditText.text.toString(),
-                LoggedUser.get().userId
-            )
+            val newCourse: Course
+            if (course != null) {
+                newCourse = course
+                newCourse.name = courseNameEditText.text.toString()
+                newCourse.description = courseDescriptionEditText.text.toString()
+
+            } else {
+                newCourse = Course(
+                    courseNameEditText.text.toString(),
+                    LoggedUser.get().name,
+                    courseDescriptionEditText.text.toString(),
+                    LoggedUser.get().userId
+                )
+            }
             val data = Intent()
-            data.putExtra(MyCoursesActivity.COURSE_KEY, course)
+            data.putExtra(MyCoursesActivity.COURSE_KEY, newCourse)
             data.putExtra(
                 MyCoursesActivity.COURSE_ID_KEY,
                 intent.getStringExtra(MyCoursesActivity.COURSE_ID_KEY)
