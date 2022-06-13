@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -18,6 +19,7 @@ import pl.dynovski.quizerr.firebaseObjects.TestResult
 import pl.dynovski.quizerr.fragments.SolveTestBaseFragment
 import pl.dynovski.quizerr.fragments.SolveTestQuestionFragment
 import pl.dynovski.quizerr.fragments.TestResultFragment
+import pl.dynovski.quizerr.singletons.LoggedUser
 import java.sql.Time
 import java.util.*
 import kotlin.properties.Delegates
@@ -124,6 +126,15 @@ class SolveTestActivity: FragmentActivity() {
                 Log.d(TAG, "Successfully added completed test")
                 addResultFragment(result)
                 moveToNextPage()
+                database.collection("Users")
+                    .document(LoggedUser.get().userId)
+                    .update("completedTestsIds", FieldValue.arrayUnion(testId))
+                    .addOnSuccessListener {
+                        Log.d(TAG, "Added test id to completedTestsIds")
+                    }
+                    .addOnFailureListener {
+                        Log.d(TAG, "Could not add test id to completedTestsIds\n$it")
+                    }
             }
             .addOnFailureListener {
                 Log.d(TAG, "Failed to save completed test")
