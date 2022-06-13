@@ -86,7 +86,7 @@ class CreateTestQuestionFragment(private val questionId: Int): Fragment() {
             val correct4 = answer4CheckBox.isChecked
 
             if (arrayOf(answer1, answer2, answer3, answer4).any { it.isBlank() }) {
-                Toast.makeText(parentActivity, "Answers cannot be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(parentActivity, "All answers must be provided", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -104,14 +104,13 @@ class CreateTestQuestionFragment(private val questionId: Int): Fragment() {
             if (parentActivity.test.numQuestions == questionId + 1)
                 parentActivity.saveTest()
             else {
-                // Add next fragment when in last
-                if (parentActivity.data.keys.count() == questionId + 1) {
+                if (parentActivity.numFragments() - 2 == questionId) {
                     parentActivity.addQuestionFragment()
                     parentActivity.moveToNextPage()
-                    nextButton.setText(R.string.action_edit)
-                } else { // Otherwise edit already created fragment
+                    nextButton.setText(R.string.action_create_test_update)
+                } else {
                     parentActivity.moveToNextPage()
-                    Toast.makeText(parentActivity, "Question $questionId edited", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(parentActivity, "Question ${questionId + 1} edited", Toast.LENGTH_SHORT).show()
                 }
             }
         }

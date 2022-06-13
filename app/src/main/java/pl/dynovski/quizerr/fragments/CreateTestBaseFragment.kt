@@ -99,10 +99,13 @@ class CreateTestBaseFragment(private var courseId: String): Fragment() {
                     courseId
                 )
             }
-            if (parentActivity.numFragments() == 1) {
-                parentActivity.addQuestionFragment()
-                parentActivity.moveToNextPage()
-            }
+            createButton.visibility = View.GONE
+            testNameEditText.isEnabled = false
+            dueDateTextView.isEnabled = false
+            numOfQuestionsEditText.isEnabled = false
+
+            parentActivity.addQuestionFragment()
+            parentActivity.moveToNextPage()
         }
 
         cancelButton.setOnClickListener {

@@ -56,6 +56,7 @@
     <!-- Strings related to create test -->
     <string name="action_create_test_cancel">Cancel</string>
     <string name="action_create_test_next">Next</string>
+    <string name="action_create_test_update">Update</string>
     <string name="prompt_create_test_name">Enter test name</string>
     <string name="prompt_create_test_name_hint">Test name</string>
     <string name="prompt_create_test_date">Pick deadline for this test</string>
@@ -64,14 +65,12 @@
     <string name="prompt_create_test_num_questions_hint">Enter number here</string>
     <string name="prompt_create_test_num_answers">Enter number of answers for each question</string>
     <string name="prompt_create_test_num_answers_hint">Enter number here</string>
-    <string name="action_create_test">Create</string>
+    <string name="action_create_test">Save</string>
     <string name="prompt_answer_hint">Write answer here</string>
     <string name="prompt_question_hint">Write question here</string>
     <string name="prompt_correct">Correct</string>
     <!-- Strings related to courses list -->
     <string name="prompt_course_item_enrolled">Enrolled:</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_home_panel_create_question">Question</string>
     <string name="action_edit">Edit</string>
     <string name="label_all_courses">Courses</string>
@@ -113,40 +112,6 @@
     <string name="prompt_scored">Your score:</string>
     <string name="action_finish">Finish</string>
     <string name="label_reset_password">Reset password</string>
-    <!--        <string name="subscribe">Subscribe</string>-->
-    <!--        <string name="unsubscribe">Unsubscribe</string>-->
-    <!--        <string name="create_test_question_hint">Question text</string>-->
-    <!--        <string name="create_test_add_answers">Add answers</string>-->
-    <!--        <string name="create_test_answer1">Answer 1</string>-->
-    <!--        <string name="create_test_answer2">Answer 2</string>-->
-    <!--        <string name="create_test_answer3">Answer 3</string>-->
-    <!--        <string name="create_test_answer4">Answer 4</string>-->
-    <!--        <string name="correct">Correct</string>-->
-    <!--        <string name="next">Next</string>-->
-    <!--        <string name="edit">Edit</string>-->
-    <!--        <string name="answer_hint">Write answer here</string>-->
-    <!--        <string name="course_name">Course name</string>-->
-    <!--        <string name="teacher_name">Teacher name</string>-->
-    <!--        <string name="description">Description</string>-->
-    <!--        <string name="begin_test">Begin test</string>-->
-    <!--        <string name="solve_test_number_of_questions">Number of questions in this test</string>-->
-    <!--        <string name="solve_test_deadline">Deadline for this test</string>-->
-    <!--        <string name="save">Save</string>-->
-    <!--        <string name="test_summary_score_prompt">Your Score:</string>-->
-    <!--        <string name="finish">finish</string>-->
-    <!--        <string name="add_test_menu_item">Add test</string>-->
-    <!--        <string name="edit_course_menu_item">Edit course</string>-->
-    <!--        <string name="delete_course_menu_item">Delete course</string>-->
-    <!--        <string name="show_result_test_name">Test name</string>-->
-    <!--        <string name="show_result_course_name">Course name</string>-->
-    <!--        <string name="show_result_score">Score</string>-->
-    <!--        <string name="add_course_description_prompt">Add description for this course</string>-->
-    <!--        <string name="edit_course_name">Edit course name</string>-->
-    <!--        <string name="edit_course_description">Edit course description</string>-->
-    <!--        <string name="edit_course_success">Successfully edited course</string>-->
-    <!--        <string name="edit_course_cancel">Cancelled editing course</string>-->
-    <!--        <string name="edit_course_failed">Failed to edit course</string>-->
-    <!--        <string name="update_account_success">Account information updated</string>-->
-    <!--        <string name="create_course_success">New course created</string>-->
-    <!--        <string name="create_course_failed">Failed to create new course</string>-->
+    <string name="action_course_create_start">Start</string>
+    <string name="label_test_details">Test details</string>
 </resources>

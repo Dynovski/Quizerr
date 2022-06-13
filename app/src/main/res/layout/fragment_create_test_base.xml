@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/lato_bold"
-                    android:text="@string/label_home_panel_create_test"
+                    android:text="@string/label_test_details"
                     android:textColor="@color/sandish"
                     android:textSize="42sp" />
 
@@ -143,6 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="16dp"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <Button
@@ -168,7 +169,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/accent_rounded_background"
                             android:fontFamily="@font/lato_bold"
-                            android:text="@string/action_course_create"
+                            android:text="@string/action_course_create_start"
                             android:textAllCaps="false"
                             android:textColor="#fff"
                             android:textSize="24sp" />
