@@ -42,6 +42,7 @@ class ActiveTestsActivity: AppCompatActivity() {
             .get()
             .addOnSuccessListener { userDocument ->
                 val user = userDocument.toObject(User::class.java) ?: return@addOnSuccessListener
+                if (user.subscribedCoursesIds.isEmpty()) return@addOnSuccessListener
                 testsViewModel.ongoingTests(user.subscribedCoursesIds).observe(this) { querySnapshot ->
                     val activeTestsDocuments =
                         querySnapshot.documents.filter { !user.completedTestsIds.contains(it.id) }
@@ -70,6 +71,7 @@ class ActiveTestsActivity: AppCompatActivity() {
             .get()
             .addOnSuccessListener { userDocument ->
                 val user = userDocument.toObject(User::class.java) ?: return@addOnSuccessListener
+                if (user.subscribedCoursesIds.isEmpty()) return@addOnSuccessListener
                 testsViewModel.ongoingTests(user.subscribedCoursesIds).observe(this) { querySnapshot ->
                     val activeTestsDocuments =
                         querySnapshot.documents.filter { !user.completedTestsIds.contains(it.id) }

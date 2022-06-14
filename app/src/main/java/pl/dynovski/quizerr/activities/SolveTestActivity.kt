@@ -12,7 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.adapters.ViewPagerAdapter
-import pl.dynovski.quizerr.databinding.ActivityCreateTestBinding
+import pl.dynovski.quizerr.databinding.ActivityTestViewPagerBinding
 import pl.dynovski.quizerr.firebaseObjects.Answer
 import pl.dynovski.quizerr.firebaseObjects.Question
 import pl.dynovski.quizerr.firebaseObjects.TestResult
@@ -20,14 +20,12 @@ import pl.dynovski.quizerr.fragments.SolveTestBaseFragment
 import pl.dynovski.quizerr.fragments.SolveTestQuestionFragment
 import pl.dynovski.quizerr.fragments.TestResultFragment
 import pl.dynovski.quizerr.singletons.LoggedUser
-import java.sql.Time
 import java.util.*
-import kotlin.properties.Delegates
 
 class SolveTestActivity: FragmentActivity() {
     private val TAG = "SOLVE_TEST"
 
-    private lateinit var binding: ActivityCreateTestBinding
+    private lateinit var binding: ActivityTestViewPagerBinding
     // Firebase variables
     private lateinit var database: FirebaseFirestore
 
@@ -57,7 +55,7 @@ class SolveTestActivity: FragmentActivity() {
 
         getTestData()
 
-        binding = ActivityCreateTestBinding.inflate(layoutInflater)
+        binding = ActivityTestViewPagerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         database = Firebase.firestore

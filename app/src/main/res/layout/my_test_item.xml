@@ -43,7 +43,7 @@
             android:background="@drawable/accent_rounded_background"
             android:fontFamily="@font/lato_bold"
             android:gravity="center"
-            android:text="@string/action_edit"
+            android:text="@string/action_delete"
             android:textAllCaps="true"
             android:textColor="#fff"
             android:textSize="14sp" />

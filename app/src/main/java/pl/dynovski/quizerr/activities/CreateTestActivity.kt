@@ -12,7 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.adapters.ViewPagerAdapter
-import pl.dynovski.quizerr.databinding.ActivityCreateTestBinding
+import pl.dynovski.quizerr.databinding.ActivityTestViewPagerBinding
 import pl.dynovski.quizerr.firebaseObjects.Answer
 import pl.dynovski.quizerr.firebaseObjects.Question
 import pl.dynovski.quizerr.firebaseObjects.Test
@@ -23,7 +23,7 @@ import pl.dynovski.quizerr.singletons.LoggedUser
 class CreateTestActivity : FragmentActivity() {
     private val TAG = "CREATE_TEST"
 
-    private lateinit var binding: ActivityCreateTestBinding
+    private lateinit var binding: ActivityTestViewPagerBinding
 
     // Firebase variables
     private lateinit var database: FirebaseFirestore
@@ -43,7 +43,7 @@ class CreateTestActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityCreateTestBinding.inflate(layoutInflater)
+        binding = ActivityTestViewPagerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         database = Firebase.firestore

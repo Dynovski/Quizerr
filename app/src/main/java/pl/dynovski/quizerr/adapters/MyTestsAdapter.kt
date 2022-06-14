@@ -1,12 +1,14 @@
 package pl.dynovski.quizerr.adapters
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.QuerySnapshot
+import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.activities.MyTestsActivity
 import pl.dynovski.quizerr.databinding.MyTestItemBinding
 import pl.dynovski.quizerr.firebaseObjects.Test
@@ -28,13 +30,21 @@ class MyTestsAdapter: RecyclerView.Adapter<MyTestsAdapter.ViewHolder>() {
         holder.bind(test)
 
         holder.editButton.setOnClickListener {
-            Toast.makeText(parent, "Edit test", Toast.LENGTH_SHORT).show()
+            val builder = AlertDialog.Builder(parent)
+            builder.setMessage(R.string.question_delete_test)
+            builder.setPositiveButton(R.string.action_yes) { dialog: DialogInterface, _: Int ->
+                dialog.dismiss()
+                parent.deleteTest(myTestsIds[position])
+            }
+            builder.setNegativeButton(R.string.action_no) { dialog: DialogInterface, _: Int ->
+                dialog.dismiss()
+            }
+            builder.create().show()
         }
     }
 
     override fun onViewRecycled(holder: ViewHolder) {
         holder.itemView.setOnClickListener(null)
-        holder.itemView.setOnLongClickListener(null)
         super.onViewRecycled(holder)
     }
 

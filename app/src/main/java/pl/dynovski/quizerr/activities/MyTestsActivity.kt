@@ -1,6 +1,7 @@
 package pl.dynovski.quizerr.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -45,5 +46,22 @@ class MyTestsActivity: AppCompatActivity() {
         testsViewModel.currentUserTests.observe(this) { queryDocumentSnapshots ->
             adapter.setTests(queryDocumentSnapshots)
         }
+    }
+
+    fun deleteTest(testId: String) {
+        database.collection("Tests")
+            .document(testId)
+            .delete()
+            .addOnSuccessListener {
+                Log.d(MyTestsActivity.TAG,"Successfully deleted test")
+                database.collection("Users")
+            }
+            .addOnFailureListener {
+                Log.d(MyTestsActivity.TAG, "Couldn't delete test\n$it")
+            }
+    }
+
+    companion object {
+        private const val TAG = "MY_TESTS"
     }
 }
