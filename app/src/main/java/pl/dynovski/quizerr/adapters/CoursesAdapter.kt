@@ -12,19 +12,24 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.ktx.Firebase
 import pl.dynovski.quizerr.R
+import pl.dynovski.quizerr.activities.CoursesActivity
+import pl.dynovski.quizerr.activities.MyCoursesActivity
 import pl.dynovski.quizerr.databinding.SubscriptionCourseItemBinding
 import pl.dynovski.quizerr.firebaseObjects.Course
 import pl.dynovski.quizerr.firebaseObjects.User
+import pl.dynovski.quizerr.fragments.CourseDetailsDialogFragment
 import pl.dynovski.quizerr.singletons.LoggedUser
 
 class CoursesAdapter: RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
 
     private var allCourses: Array<Course> = arrayOf()
     private var allCoursesIds: Array<String> = arrayOf()
+    private lateinit var parent: CoursesActivity
     private var subscribedCoursesIds: Array<String> = arrayOf()
     private val database = FirebaseFirestore.getInstance()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        this.parent = parent.context as CoursesActivity
         return ViewHolder.from(parent)
     }
 
@@ -34,6 +39,14 @@ class CoursesAdapter: RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
 
         val courseInSubscriptions = subscribedCoursesIds.contains(courseId)
         holder.bind(course, courseInSubscriptions)
+
+        holder.itemView.setOnClickListener {
+            val newFragment = CourseDetailsDialogFragment(course)
+            newFragment.show(
+                parent.supportFragmentManager,
+                course.name + "DetailDialog"
+            )
+        }
 
         holder.subscriptionButton.setOnClickListener {
             val button = it as Button
