@@ -67,7 +67,7 @@ class SignUpActivity: SignActionActivity() {
             }
         }
 
-        signUpButton.alpha = 0.5f
+        signUpButton.alpha = 0.7f
 
         signUpBinding.loginTextView.setOnClickListener {
             finish()
@@ -80,7 +80,7 @@ class SignUpActivity: SignActionActivity() {
 
             // disable login button unless both username / password is valid
             canRegister = loginState.isDataValid
-            signUpButton.alpha = if (canRegister) 1.0f else 0.5f
+            signUpButton.alpha = if (canRegister) 1.0f else 0.7f
 
             if (loginState.emailError != null) {
                 emailEditText.error = getString(loginState.emailError)

@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -64,11 +65,11 @@ class AccountDetailsActivity: AppCompatActivity() {
             }
 
         deleteAccountButton.setOnClickListener {
-            // TODO: confirmation dialog
+            val userId = LoggedUser.get().userId
             auth.currentUser!!.delete()
                 .addOnSuccessListener {
                     database.collection("Users")
-                        .document(LoggedUser.get().userId)
+                        .document(userId)
                         .delete()
                         .addOnSuccessListener {
                             Toast.makeText(
@@ -76,6 +77,19 @@ class AccountDetailsActivity: AppCompatActivity() {
                                 R.string.action_delete_success,
                                 Toast.LENGTH_SHORT
                             ).show()
+                            database.collection("Courses")
+                                .whereArrayContains("enrolledUsersIds", userId)
+                                .get()
+                                .addOnSuccessListener {
+                                    for (document in it.documents) {
+                                        database.collection("Courses")
+                                            .document(document.id)
+                                            .update("enrolledUsersIds", FieldValue.arrayRemove(userId))
+                                            .addOnSuccessListener {
+                                                Log.d(TAG, "Deleted $userId from enrolled users of ${document.id}")
+                                            }
+                                    }
+                                }
                             LoggedUser.logout()
                             val intent = Intent(this, SignInActivity::class.java)
                             intent.addFlags(
