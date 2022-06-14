@@ -95,6 +95,23 @@ class SolveTestActivity: FragmentActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage(R.string.question_finish_test)
+        builder.setPositiveButton(R.string.action_yes) { dialog: DialogInterface, _: Int ->
+            super.onBackPressed()
+        }
+        builder.setNegativeButton(R.string.action_no) { dialog: DialogInterface, _: Int ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        testTimer.cancel()
+    }
+
     private fun getTestData() {
         database.collection("Questions")
             .whereEqualTo("testId", testId)
@@ -123,6 +140,11 @@ class SolveTestActivity: FragmentActivity() {
             .addOnFailureListener {
                 Log.d(TAG, "Failed to load test")
             }
+    }
+
+    private fun addResultFragment(testResult: TestResult) {
+        adapter.addFragment(TestResultFragment(testResult), "Results")
+        adapter.notifyDataSetChanged()
     }
 
     fun setInitialResult() {
@@ -202,11 +224,6 @@ class SolveTestActivity: FragmentActivity() {
         testTimer.start()
     }
 
-    private fun addResultFragment(testResult: TestResult) {
-        adapter.addFragment(TestResultFragment(testResult), "Results")
-        adapter.notifyDataSetChanged()
-    }
-
     fun moveToNextPage() {
         viewPager.currentItem += 1
     }
@@ -217,25 +234,6 @@ class SolveTestActivity: FragmentActivity() {
 
     fun invalidateTimer() {
         testTimer.cancel()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        testTimer.cancel()
-    }
-
-    override fun onBackPressed() {
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage(R.string.question_finish_test)
-        builder.setPositiveButton(R.string.action_yes) { dialog: DialogInterface, _: Int ->
-            super.onBackPressed()
-
-        }
-        builder.setNegativeButton(R.string.action_no) { dialog: DialogInterface, _: Int ->
-            dialog.dismiss()
-        }
-        builder.create().show()
-
     }
 
     companion object {
