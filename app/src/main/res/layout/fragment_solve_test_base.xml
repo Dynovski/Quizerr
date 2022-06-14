@@ -124,7 +124,8 @@
                         android:text="@string/action_course_cancel"
                         android:textAllCaps="false"
                         android:textColor="#fff"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        android:visibility="gone" />
 
                     <Button
                         android:id="@+id/begin_button"
@@ -138,7 +139,8 @@
                         android:text="@string/action_test_begin"
                         android:textAllCaps="false"
                         android:textColor="#fff"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        android:visibility="gone" />
                 </LinearLayout>
 
             </LinearLayout>

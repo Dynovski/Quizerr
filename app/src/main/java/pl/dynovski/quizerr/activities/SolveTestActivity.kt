@@ -1,16 +1,22 @@
 package pl.dynovski.quizerr.activities
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import pl.dynovski.quizerr.R
 import pl.dynovski.quizerr.adapters.ViewPagerAdapter
 import pl.dynovski.quizerr.databinding.ActivityTestViewPagerBinding
 import pl.dynovski.quizerr.firebaseObjects.Answer
@@ -20,6 +26,7 @@ import pl.dynovski.quizerr.fragments.SolveTestBaseFragment
 import pl.dynovski.quizerr.fragments.SolveTestQuestionFragment
 import pl.dynovski.quizerr.fragments.TestResultFragment
 import pl.dynovski.quizerr.singletons.LoggedUser
+import pl.dynovski.quizerr.viewmodels.TimerViewModel
 import java.util.*
 
 class SolveTestActivity: FragmentActivity() {
@@ -41,10 +48,16 @@ class SolveTestActivity: FragmentActivity() {
     private lateinit var dueDate: Timestamp
     private var numOfQuestions: Int = 0
 
+    lateinit var timerViewModel: TimerViewModel
+    private lateinit var testTimer: CountDownTimer
+
+    private lateinit var newTestResult: DocumentReference
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        timerViewModel = ViewModelProvider(this)[TimerViewModel::class.java]
         database = Firebase.firestore
 
         testName = intent.getStringExtra(TEST_NAME_KEY)!!
@@ -68,6 +81,18 @@ class SolveTestActivity: FragmentActivity() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = adapter.getTabTitle(position)
         }.attach()
+
+        testTimer = object: CountDownTimer(45000L * numOfQuestions, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timerViewModel.timeChanged(millisUntilFinished)
+            }
+
+            override fun onFinish() {
+                val lastQuestionFragment = adapter.getItem(adapter.itemCount - 1) as SolveTestQuestionFragment
+                lastQuestionFragment.hideFinishButton()
+                checkTest()
+            }
+        }
     }
 
     private fun getTestData() {
@@ -100,6 +125,29 @@ class SolveTestActivity: FragmentActivity() {
             }
     }
 
+    fun setInitialResult() {
+        val result = TestResult(
+            testName,
+            numOfQuestions,
+            0,
+            Timestamp(Date()),
+            testId,
+            courseId,
+            LoggedUser.get().userId
+        )
+
+        newTestResult = database.collection("TestResults").document()
+
+        newTestResult
+            .set(result)
+            .addOnSuccessListener {
+                Log.d(TAG, "Added initial test result")
+            }
+            .addOnFailureListener {
+                Log.d(TAG, "Failed to add initial test result")
+            }
+    }
+
     fun checkTest() {
         var score = 0
         for (i in 1 until adapter.itemCount) {
@@ -116,12 +164,12 @@ class SolveTestActivity: FragmentActivity() {
             LoggedUser.get().userId
         )
         database.collection("TestResults")
-            .document()
+            .document(newTestResult.id)
             .set(result)
             .addOnSuccessListener {
                 Log.d(TAG, "Successfully added completed test")
                 addResultFragment(result)
-                moveToNextPage()
+                moveToLastPage()
                 database.collection("Users")
                     .document(LoggedUser.get().userId)
                     .update("completedTestsIds", FieldValue.arrayUnion(testId))
@@ -150,6 +198,10 @@ class SolveTestActivity: FragmentActivity() {
         return data.size
     }
 
+    fun startTimer() {
+        testTimer.start()
+    }
+
     private fun addResultFragment(testResult: TestResult) {
         adapter.addFragment(TestResultFragment(testResult), "Results")
         adapter.notifyDataSetChanged()
@@ -157,6 +209,33 @@ class SolveTestActivity: FragmentActivity() {
 
     fun moveToNextPage() {
         viewPager.currentItem += 1
+    }
+
+    fun moveToLastPage() {
+        viewPager.currentItem = adapter.itemCount - 1
+    }
+
+    fun invalidateTimer() {
+        testTimer.cancel()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        testTimer.cancel()
+    }
+
+    override fun onBackPressed() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage(R.string.question_finish_test)
+        builder.setPositiveButton(R.string.action_yes) { dialog: DialogInterface, _: Int ->
+            super.onBackPressed()
+
+        }
+        builder.setNegativeButton(R.string.action_no) { dialog: DialogInterface, _: Int ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+
     }
 
     companion object {

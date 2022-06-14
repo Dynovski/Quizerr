@@ -27,6 +27,8 @@ class SolveTestBaseFragment(
     private lateinit var dueDateTextView: TextView
     private lateinit var numOfQuestionsTextView: TextView
 
+    private var testStarted = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,8 +57,19 @@ class SolveTestBaseFragment(
             solveTestActivity.moveToNextPage()
             beginButton.visibility = View.GONE
             cancelButton.visibility = View.GONE
+            testStarted = true
+            solveTestActivity.startTimer()
+            solveTestActivity.setInitialResult()
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!testStarted) {
+            beginButton.visibility = View.VISIBLE
+            cancelButton.visibility = View.VISIBLE
+        }
     }
 }

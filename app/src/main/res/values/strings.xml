@@ -72,6 +72,7 @@
     <!-- Strings related to courses list -->
     <string name="prompt_course_item_enrolled">Enrolled:</string>
     <string name="label_home_panel_create_question">Question</string>
+    <string name="label_create_question">Create question</string>
     <string name="action_edit">Edit</string>
     <string name="label_all_courses">Courses</string>
     <string name="action_subscribe">Subscribe</string>
@@ -101,6 +102,7 @@
     <string name="create_course_failed">Failed to create new course</string>
     <string name="question_delete_course">Do you want to delete this course?</string>
     <string name="question_delete_account">Do you want to delete this account?</string>
+    <string name="question_finish_test">Do you want to finish test?</string>
     <string name="question_delete_test">Do you want to delete this test?</string>
     <string name="action_yes">Yes</string>
     <string name="action_no">No</string>

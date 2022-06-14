@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import pl.dynovski.quizerr.activities.SolveTestActivity
 import pl.dynovski.quizerr.databinding.FragmentSolveTestQuestionBinding
 import pl.dynovski.quizerr.firebaseObjects.Answer
@@ -21,6 +22,7 @@ class SolveTestQuestionFragment(
 
     private lateinit var binding: FragmentSolveTestQuestionBinding
 
+    private lateinit var topTextView: TextView
     private lateinit var questionTextView: TextView
 
     private lateinit var answer1TextView: TextView
@@ -42,6 +44,7 @@ class SolveTestQuestionFragment(
     ): View {
         binding = FragmentSolveTestQuestionBinding.inflate(inflater)
 
+        topTextView = binding.topTextView
         questionTextView = binding.questionTextView
 
         answer1TextView = binding.answer1
@@ -65,11 +68,20 @@ class SolveTestQuestionFragment(
         answer3TextView.text = answers[2].text
         answer4TextView.text = answers[3].text
 
+        solveTestActivity.timerViewModel.timeInMillis.observe(viewLifecycleOwner, Observer {
+            val newTime = it ?: return@Observer
+            if (newTime / 1000 < 1) {
+                topTextView.text = "Time's up!"
+            } else {
+                topTextView.text = "${newTime / 1000} s"
+            }
+        })
 
         if (solveTestActivity.getNumQuestions() == questionId + 1) {
             finishButton.visibility = View.VISIBLE
             finishButton.setOnClickListener {
                 finishButton.visibility = View.GONE
+                solveTestActivity.invalidateTimer()
                 solveTestActivity.checkTest()
             }
         }
@@ -82,5 +94,9 @@ class SolveTestQuestionFragment(
                 answer2CheckBox.isChecked == answers[1].isCorrect &&
                 answer3CheckBox.isChecked == answers[2].isCorrect &&
                 answer4CheckBox.isChecked == answers[3].isCorrect
+    }
+
+    fun hideFinishButton() {
+        finishButton.visibility = View.GONE
     }
 }

@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/lato_bold"
-                    android:text="@string/label_home_panel_create_question"
+                    android:text="@string/label_create_question"
                     android:textColor="@color/sandish"
                     android:textSize="42sp" />
 
