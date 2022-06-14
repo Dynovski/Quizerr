@@ -34,11 +34,7 @@ class CreateTestQuestionFragment(private val questionId: Int): Fragment() {
     private lateinit var nextButton: Button
 
     private lateinit var parentActivity: CreateTestActivity
-    // TODO: data from activity already added
-    private var wasDataPassedToParent: Boolean = false
 
-    // TODO: viewmodele dla każdego fragmentu, dla textchange ustawianie pola w klasie zdefiniowanej
-    // TODO: na szczycie fragmentu, klasa umieszczana w data, wtedy powinno aktualizować bez wciskania buttona
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
