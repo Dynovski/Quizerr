@@ -82,7 +82,7 @@ class SolveTestActivity: FragmentActivity() {
             tab.text = adapter.getTabTitle(position)
         }.attach()
 
-        testTimer = object: CountDownTimer(1000L * numOfQuestions, 1000) {
+        testTimer = object: CountDownTimer(40000L * numOfQuestions, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 timerViewModel.timeChanged(millisUntilFinished)
             }
@@ -164,6 +164,15 @@ class SolveTestActivity: FragmentActivity() {
             .set(result)
             .addOnSuccessListener {
                 Log.d(TAG, "Added initial test result")
+                database.collection("Users")
+                    .document(LoggedUser.get().userId)
+                    .update("completedTestsIds", FieldValue.arrayUnion(testId))
+                    .addOnSuccessListener {
+                        Log.d(TAG, "Added test id to completedTestsIds")
+                    }
+                    .addOnFailureListener {
+                        Log.d(TAG, "Could not add test id to completedTestsIds\n$it")
+                    }
             }
             .addOnFailureListener {
                 Log.d(TAG, "Failed to add initial test result")
