@@ -15,6 +15,10 @@ import pl.dynovski.quizerr.databinding.FragmentCreateTestBaseBinding
 import pl.dynovski.quizerr.firebaseObjects.Test
 import pl.dynovski.quizerr.singletons.LoggedUser
 import java.text.SimpleDateFormat
+import java.time.Duration
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
 import java.util.*
 
 class CreateTestBaseFragment(private var courseId: String): Fragment() {
@@ -52,6 +56,9 @@ class CreateTestBaseFragment(private var courseId: String): Fragment() {
                 calendar.set(Calendar.YEAR, year)
                 calendar.set(Calendar.MONTH, monthOfYear)
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                calendar.set(Calendar.HOUR_OF_DAY, 23)
+                calendar.set(Calendar.MINUTE, 59)
+                calendar.set(Calendar.SECOND, 59)
                 updateDueDate()
             }
 
@@ -63,8 +70,7 @@ class CreateTestBaseFragment(private var courseId: String): Fragment() {
             calendar.get(Calendar.DAY_OF_MONTH)
         )
 
-        datePickerDialog.datePicker.minDate = Date().time
-
+        datePickerDialog.datePicker.minDate = Date().time + 86400000L
         dueDateTextView.setOnClickListener {
             datePickerDialog.show()
         }
@@ -72,7 +78,6 @@ class CreateTestBaseFragment(private var courseId: String): Fragment() {
         createButton.setOnClickListener {
             val name = testNameEditText.text.toString().trim()
             val numOfQuestions = numOfQuestionsEditText.text.toString().trim()
-            val dueDateString = dueDateTextView.text.toString()
             val dueDate: Date? = calendar.time
 
             if (name.isBlank()) {
@@ -80,7 +85,7 @@ class CreateTestBaseFragment(private var courseId: String): Fragment() {
                 testNameEditText.requestFocus()
                 return@setOnClickListener
             }
-            if (dueDateString.isBlank()) {
+            if (calendar.time < Date()) {
                 dueDateTextView.error = "Test must have a deadline"
                 dueDateTextView.requestFocus()
                 return@setOnClickListener

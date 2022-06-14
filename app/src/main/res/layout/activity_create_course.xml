@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/lato_bold"
-                    android:text="@string/app_name"
+                    android:text="@string/label_home_panel_create_course"
                     android:textColor="@color/sandish"
                     android:textSize="42sp" />
             </RelativeLayout>

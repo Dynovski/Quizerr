@@ -131,10 +131,12 @@ class SignUpActivity: SignActionActivity() {
                     val userId = auth.currentUser!!.uid
                     val defaultName = email.substringBefore("@")
                     val newUser = User(defaultName, email, userId)
-                    LoggedUser.login(newUser)
                     database.collection("Users").document(userId).set(newUser)
-                    finish()
-                    startActivity(Intent(this, HomePanelActivity::class.java))
+                        .addOnSuccessListener {
+                            LoggedUser.login(newUser)
+                            finish()
+                            startActivity(Intent(this, HomePanelActivity::class.java))
+                        }
                 } else {
                     Log.w(LOG_TAG, "User creation for $email failed", task.exception)
                     if (task.exception is FirebaseAuthUserCollisionException)

@@ -155,5 +155,6 @@ class HomePanelActivity: AppCompatActivity() {
         super.onDestroy()
         Log.d(TAG, "Signed out on HomePanelActivity destroy")
         auth.signOut()
+        LoggedUser.logout()
     }
 }

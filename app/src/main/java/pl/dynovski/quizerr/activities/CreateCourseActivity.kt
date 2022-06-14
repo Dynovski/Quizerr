@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -28,6 +29,7 @@ class CreateCourseActivity : AppCompatActivity() {
     private lateinit var courseDescriptionEditText: EditText
     private lateinit var courseCreateButton: Button
     private lateinit var courseCancelButton: Button
+    private lateinit var topTextView: TextView
 
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseFirestore
@@ -43,6 +45,7 @@ class CreateCourseActivity : AppCompatActivity() {
         courseDescriptionEditText= createCourseBinding.courseDescriptionEditText
         courseCreateButton = createCourseBinding.createButton
         courseCancelButton = createCourseBinding.cancelButton
+        topTextView = createCourseBinding.headerTextView
 
         auth = Firebase.auth
         database = Firebase.firestore
@@ -77,6 +80,7 @@ class CreateCourseActivity : AppCompatActivity() {
         }
 
         if (course != null) {
+            topTextView.text = "Edit course"
             courseNameEditText.setText(course.name)
             courseDescriptionEditText.setText(course.description)
         }

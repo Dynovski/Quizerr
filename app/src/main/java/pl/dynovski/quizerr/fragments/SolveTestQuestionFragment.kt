@@ -30,12 +30,12 @@ class SolveTestQuestionFragment(
     private lateinit var answer3TextView: TextView
     private lateinit var answer4TextView: TextView
 
-    private lateinit var answer1CheckBox: CheckBox
+    private var answer1CheckBox: CheckBox? = null
     private lateinit var answer2CheckBox: CheckBox
     private lateinit var answer3CheckBox: CheckBox
     private lateinit var answer4CheckBox: CheckBox
 
-    private lateinit var finishButton: Button
+    private var finishButton: Button? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,9 +78,9 @@ class SolveTestQuestionFragment(
         })
 
         if (solveTestActivity.getNumFragments() == questionId + 2) {
-            finishButton.visibility = View.VISIBLE
-            finishButton.setOnClickListener {
-                finishButton.visibility = View.GONE
+            finishButton?.visibility = View.VISIBLE
+            finishButton?.setOnClickListener {
+                finishButton?.visibility = View.GONE
                 solveTestActivity.invalidateTimer()
                 solveTestActivity.checkTest()
             }
@@ -90,13 +90,16 @@ class SolveTestQuestionFragment(
     }
 
     fun areAnswersCorrect(): Boolean {
-        return answer1CheckBox.isChecked == answers[0].isCorrect &&
-                answer2CheckBox.isChecked == answers[1].isCorrect &&
-                answer3CheckBox.isChecked == answers[2].isCorrect &&
-                answer4CheckBox.isChecked == answers[3].isCorrect
+        return if (answer1CheckBox == null)
+            false
+        else
+            answer1CheckBox?.isChecked == answers[0].isCorrect &&
+                    answer2CheckBox.isChecked == answers[1].isCorrect &&
+                    answer3CheckBox.isChecked == answers[2].isCorrect &&
+                    answer4CheckBox.isChecked == answers[3].isCorrect
     }
 
     fun hideFinishButton() {
-        finishButton.visibility = View.GONE
+        finishButton?.visibility = View.GONE
     }
 }
