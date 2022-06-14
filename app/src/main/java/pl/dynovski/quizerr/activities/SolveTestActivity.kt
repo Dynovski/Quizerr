@@ -82,7 +82,7 @@ class SolveTestActivity: FragmentActivity() {
             tab.text = adapter.getTabTitle(position)
         }.attach()
 
-        testTimer = object: CountDownTimer(45000L * numOfQuestions, 1000) {
+        testTimer = object: CountDownTimer(1000L * numOfQuestions, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 timerViewModel.timeChanged(millisUntilFinished)
             }
@@ -218,6 +218,10 @@ class SolveTestActivity: FragmentActivity() {
 
     fun getNumQuestions(): Int {
         return data.size
+    }
+
+    fun getNumFragments(): Int {
+        return adapter.numFragments()
     }
 
     fun startTimer() {

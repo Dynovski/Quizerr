@@ -77,7 +77,7 @@ class SolveTestQuestionFragment(
             }
         })
 
-        if (solveTestActivity.getNumQuestions() == questionId + 1) {
+        if (solveTestActivity.getNumFragments() == questionId + 2) {
             finishButton.visibility = View.VISIBLE
             finishButton.setOnClickListener {
                 finishButton.visibility = View.GONE
