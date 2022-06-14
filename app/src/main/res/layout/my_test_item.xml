@@ -38,7 +38,7 @@
         <Button
             android:id="@+id/edit_button"
             style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-            android:layout_width="100sp"
+            android:layout_width="wrap_content"
             android:layout_height="38dp"
             android:background="@drawable/accent_rounded_background"
             android:fontFamily="@font/lato_bold"
